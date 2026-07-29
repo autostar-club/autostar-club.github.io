@@ -1,6 +1,6 @@
 <!-- src/components/layout/Navbar.vue -->
 <template>
-  <nav class="bg-red-700 text-white shadow-md">
+  <nav class="bg-red-700 text-white shadow-md relative z-50">
     <div class="container mx-auto px-4 flex justify-between items-center h-16">
       <!-- Logo / Slogan -->
       <a href="/" class="flex items-center gap-2 font-bold text-lg">
@@ -27,7 +27,7 @@
         </div>
 
         <a href="/fiches-pratiques" class="hover:text-red-200">Fiches "C'est pas sorcier"</a>
-        <a href="/adhésion" class="hover:text-red-200">Adhésion</a>
+        <a href="/adhesion" class="hover:text-red-200">Adhésion</a>
         <a href="/presentation" class="hover:text-red-200">Présentation</a>
       </div>
 
@@ -40,7 +40,7 @@
     </div>
 
     <!-- Drawer Mobile -->
-    <div v-if="isOpen" class="md:hidden bg-red-800 px-4 pt-2 pb-4 space-y-2">
+    <div v-if="isOpen" class="md:hidden bg-red-800 px-4 pt-2 pb-4 space-y-2 relative z-50">
       <a href="/" class="block hover:bg-red-700 p-2 rounded">Accueil</a>
       <a href="/sorties/a-venir" class="block hover:bg-red-700 p-2 rounded">Sorties à venir</a>
       <a href="/sorties/ecoulees" class="block hover:bg-red-700 p-2 rounded">Sorties écoulées</a>

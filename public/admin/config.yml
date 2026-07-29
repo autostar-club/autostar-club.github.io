@@ -1,8 +1,14 @@
 # public/admin/config.yml
 backend:
   name: github
-  repo: VOTRE_ORGANISATION/autostar-club # Remplacez par votre dépôt GitHub
-  branch: main # Branche principale de déploiement
+  repo: autostar-club/autostar-club.github.io
+  branch: main
+  base_url: https://decap-proxy-autostar-club.olivier-barais.workers.dev
+  auth_endpoint: /auth
+  slug: 
+      encoding: "ascii"
+      clean_accents: true
+      sanitize_replacement: "_"
 
 # Stockage des images et médias importés via le CMS
 media_folder: "public/uploads"

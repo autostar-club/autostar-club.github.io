@@ -1,0 +1,67 @@
+---
+// src/pages/fiches-pratiques/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FicheCard from '../../components/fiches/FicheCard.astro';
+import { getCollection } from 'astro:content';
+
+const allFiches = await getCollection('fiches');
+
+// Tri des fiches de la plus récente à la plus ancienne
+const fiches = allFiches.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+// Liste des catégories disponibles
+const categories = ['Toutes', 'Électricité', 'Plomberie', 'Entretien', 'Accessoires', 'Sécurité', 'Mécanique'];
+---
+
+<BaseLayout 
+  title="Fiches pratiques & Astuces" 
+  description="Trucs et astuces techniques rédigés par les membres du Club Autostar pour entretenir et équiper votre camping-car."
+>
+  <!-- En-tête de section -->
+  <div class="bg-slate-900 text-white p-8 rounded-xl mb-8 shadow-md">
+    <div class="max-w-3xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Entraide & Technique</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold mt-1 mb-3">Fiches "C'est pas sorcier"</h1>
+      <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+        Découvrez les trucs, astuces et tutoriels rédigés et partagés par les adhérents du club. 
+        Électricité, chauffage, plomberie ou bricolage : résolvez facilement les petits soucis techniques de votre camping-car !
+      </p>
+    </div>
+  </div>
+
+  <!-- Grille des Fiches -->
+  {fiches.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {fiches.map((fiche) => (
+        <FicheCard
+          title={fiche.data.title}
+          category={fiche.data.category}
+          description={fiche.data.description}
+          date={fiche.data.date}
+          pdfUrl={fiche.data.pdfFile}
+          slug={ fiche.id}
+        />
+      ))}
+    </div>
+  ) : (
+    <div class="bg-white border border-slate-200 rounded-xl p-10 text-center text-slate-600 my-8">
+      <p class="text-lg font-bold text-slate-800">Aucune fiche technique disponible pour le moment</p>
+      <p class="text-sm text-slate-500 mt-2">Les membres du bureau ajoutent progressivement de nouveaux tutoriels.</p>
+    </div>
+  )}
+
+  <!-- Appel à contribution -->
+  <div class="mt-12 bg-amber-50 border border-amber-200 rounded-xl p-6 md:p-8 text-amber-900 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div>
+      <h3 class="font-bold text-lg mb-1">Vous avez une astuce à partager ?</h3>
+      <p class="text-xs md:text-sm text-amber-800">
+        Si vous avez réalisé une amélioration sur votre véhicule Autostar, proposez votre fiche technique au bureau pour la partager avec tout le club !
+      </p>
+    </div>
+    <a href="/contact" class="shrink-0 bg-amber-800 hover:bg-amber-900 text-white font-semibold text-xs px-4 py-2.5 rounded-lg transition-colors">
+      Proposer une fiche
+    </a>
+  </div>
+</BaseLayout>

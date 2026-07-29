@@ -1,0 +1,175 @@
+---
+// src/pages/adhesion.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Chemins des deux images du bulletin d'adhésion
+const bulletinPage1 = "/uploads/BULLETIN_ADHESION_ATS_CLUB-page-001.jpg";
+const bulletinPage2 = "/uploads/BULLETIN_ADHESION_ATS_CLUB-page-002.jpg";
+---
+
+<BaseLayout 
+  title="Adhésion au Club Autostar" 
+  description="Rejoignez le Club Autostar : découvrez les tarifs, les avantages adhérents et consultez le bulletin d'adhésion."
+>
+  <!-- Hero Banner Adhésion -->
+  <div class="bg-slate-900 text-white p-8 md:p-12 rounded-xl mb-10 shadow-lg">
+    <div class="max-w-3xl">
+      <span class="inline-block bg-red-700 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+        Rejoignez-nous !
+      </span>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-3">Adhésion au Club Autostar</h1>
+      <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+        Vous êtes propriétaire d'un camping-car AUTOSTAR ? Venez partager vos voyages, échanger vos expériences et profiter de tous nos rassemblements et fiches techniques.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    
+    <!-- Zone Principale : Offres & Avantages -->
+    <div class="lg:col-span-2 space-y-8">
+      
+      <!-- Offres et Tarifs d'Adhésion -->
+      <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>💳</span> Tarifs et Cotisations
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- Carte Offre 1ère Année Offerte -->
+          <div class="border-2 border-emerald-500 bg-emerald-50/50 rounded-xl p-6 relative flex flex-col justify-between">
+            <span class="absolute -top-3 right-4 bg-emerald-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">
+              Offre de bienvenue
+            </span>
+            <div>
+              <h3 class="font-extrabold text-slate-900 text-lg mb-1">1ère Année Offerte</h3>
+              <p class="text-xs text-emerald-800 font-medium mb-4">Achat d'un véhicule neuf</p>
+              <div class="text-3xl font-black text-emerald-700 mb-4">0 €</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                Pour tout premier achat d'un camping-car <strong>AUTOSTAR neuf</strong> de la collection, votre adhésion au club vous est offerte pendant un an par le constructeur et le club !
+              </p>
+            </div>
+            <a href="#bulletin" class="block text-center bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold py-2.5 px-4 rounded-lg transition-colors">
+              Voir le bulletin d'adhésion
+            </a>
+          </div>
+
+          <!-- Carte Adhésion Annuelle Classique -->
+          <div class="border border-slate-200 bg-slate-50 rounded-xl p-6 flex flex-col justify-between">
+            <div>
+              <h3 class="font-extrabold text-slate-900 text-lg mb-1">Cotisation Annuelle</h3>
+              <p class="text-xs text-slate-500 mb-4">Renouvellement & Réadhésion</p>
+              <div class="text-3xl font-black text-slate-900 mb-4">40 € <span class="text-xs font-normal text-slate-500">/ an</span></div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                La cotisation couvre l'année civile pour l'équipage (camping-car et ses occupants) et inclut la carte d'adhérent ainsi que l'accès aux sorties et fiches.
+              </p>
+            </div>
+            <a href="#bulletin" class="block text-center bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold py-2.5 px-4 rounded-lg transition-colors">
+              Voir le bulletin d'adhésion
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Section Prévisualisation du Bulletin (Les 2 pages) -->
+      <section id="bulletin" class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-2 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>🖼️</span> Bulletin d'Adhésion (2 pages)
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 mb-6">
+          Cliquez sur les images pour les ouvrir en grand, les enregistrer ou les imprimer avant de renvoyer votre dossier.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Page 1 -->
+          <div class="border border-slate-200 rounded-lg overflow-hidden bg-slate-50 group shadow-sm hover:shadow-md transition-shadow">
+            <div class="p-3 bg-slate-900 text-white flex justify-between items-center text-xs font-bold">
+              <span>Page 1 — Bulletin</span>
+              <a href={bulletinPage1} target="_blank" rel="noopener noreferrer" class="text-red-400 hover:underline">Agrandir 🔍</a>
+            </div>
+            <a href={bulletinPage1} target="_blank" rel="noopener noreferrer" class="block overflow-hidden">
+              <img 
+                src={bulletinPage1} 
+                alt="Bulletin d'adhésion Club Autostar - Page 1" 
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </a>
+            <div class="p-3 text-center bg-white border-t border-slate-100">
+              <a 
+                href={bulletinPage1} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-block bg-slate-800 hover:bg-red-700 text-white text-xs font-semibold py-1.5 px-3 rounded transition-colors"
+              >
+                Télécharger la Page 1 (JPG)
+              </a>
+            </div>
+          </div>
+
+          <!-- Page 2 -->
+          <div class="border border-slate-200 rounded-lg overflow-hidden bg-slate-50 group shadow-sm hover:shadow-md transition-shadow">
+            <div class="p-3 bg-slate-900 text-white flex justify-between items-center text-xs font-bold">
+              <span>Page 2 — Notice & Règlement</span>
+              <a href={bulletinPage2} target="_blank" rel="noopener noreferrer" class="text-red-400 hover:underline">Agrandir 🔍</a>
+            </div>
+            <a href={bulletinPage2} target="_blank" rel="noopener noreferrer" class="block overflow-hidden">
+              <img 
+                src={bulletinPage2} 
+                alt="Bulletin d'adhésion Club Autostar - Page 2" 
+                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-300"
+              />
+            </a>
+            <div class="p-3 text-center bg-white border-t border-slate-100">
+              <a 
+                href={bulletinPage2} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class="inline-block bg-slate-800 hover:bg-red-700 text-white text-xs font-semibold py-1.5 px-3 rounded transition-colors"
+              >
+                Télécharger la Page 2 (JPG)
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Sidebar : Instructions d'envoi -->
+    <div class="space-y-6">
+      
+      <!-- Bloc Modalités d'envoi -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 space-y-4">
+        <h3 class="font-bold text-slate-900 text-base border-b pb-2">📮 Comment envoyer votre dossier ?</h3>
+        
+        <ol class="text-xs text-slate-600 space-y-3 list-decimal pl-4">
+          <li>Téléchargez et imprimez la <strong>Page 1</strong> (et éventuellement la Page 2 pour conservation).</li>
+          <li>Complétez lisiblement les informations concernant votre équipage et votre véhicule.</li>
+          <li>Joignez votre règlement par chèque à l'ordre du <strong>Club Autostar</strong> (sauf offre 1ère année offerte avec justificatif d'achat neuf).</li>
+          <li>Envoyez le tout à l'adresse du siège social ci-dessous.</li>
+        </ol>
+
+        <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-xs mt-4">
+          <p class="font-bold text-slate-800 mb-1">Adresse d'expédition :</p>
+          <p class="text-slate-600"><strong>Club Autostar</strong></p>
+          <p class="text-slate-600">Secrétariat des Adhésions</p>
+          <p class="text-slate-600">Z.I. du Launay</p>
+          <p class="text-slate-600">22800 Saint-Brandan</p>
+        </div>
+      </div>
+
+      <!-- Bloc Besoin d'aide -->
+      <div class="bg-slate-100 p-6 rounded-xl border border-slate-200 text-center">
+        <h4 class="font-bold text-slate-900 text-sm mb-1">Une question sur l'adhésion ?</h4>
+        <p class="text-xs text-slate-600 mb-4">Notre secrétariat est à votre disposition pour vous renseigner.</p>
+        <a href="/contact" class="inline-block bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold px-4 py-2 rounded-md transition-colors">
+          Nous contacter
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>

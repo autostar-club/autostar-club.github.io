@@ -1,0 +1,194 @@
+---
+// src/pages/presentation.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Présentation du Club" 
+  description="Découvrez l'histoire, les valeurs, les objectifs et l'organigramme du Club Autostar."
+>
+  <!-- Hero Banner Présentation -->
+  <div class="relative bg-slate-900 text-white p-8 md:p-12 rounded-xl mb-10 overflow-hidden shadow-lg">
+    <div class="relative z-10 max-w-3xl">
+      <span class="inline-block bg-red-700 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+        Association loi 1901 — Depuis 1987
+      </span>
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4">
+        Le Club Autostar
+      </h1>
+      <p class="text-lg md:text-xl text-slate-300 italic font-serif mb-6">
+        « Toujours libres, jamais seuls »
+      </p>
+      <p class="text-sm md:text-base text-slate-300 leading-relaxed">
+        Une communauté de passionnés et d'utilisateurs de camping-cars AUTOSTAR réunie autour des valeurs de convivialité, d'entraide et du plaisir de voyager ensemble.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    
+    <!-- Colonne Principale -->
+    <div class="lg:col-span-2 space-y-10">
+      
+      <!-- Section Histoire -->
+      <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>📜</span> Notre Histoire
+        </h2>
+        <div class="prose prose-slate max-w-none text-slate-700 space-y-4 text-sm md:text-base leading-relaxed">
+          <p>
+            L'<strong>AUTOSTAR-CLUB</strong> a été créé en 1987 sous l'impulsion des dirigeants de la société AUTOSTAR et de passionnés de la marque. 
+            Le but initial était d'offrir aux propriétaires d'un véhicule de la marque un espace d'échange où confronter leurs expériences et former un véritable club d'amis.
+          </p>
+          <p>
+            Depuis plus de 35 ans, le club regroupe plusieurs centaines d'équipages répartis dans toute la France. Être Autostariste, c'est bénéficier d'un réseau dynamique d'entraide et participer à des rassemblements chaleureux tout au long de l'année.
+          </p>
+          <div class="bg-slate-50 border-l-4 border-red-700 p-4 rounded-r-lg my-4 text-sm font-medium text-slate-800">
+            🎁 <strong>Offre Nouveaux Propriétaires :</strong> En cadeau de bienvenue, pour le 1er achat d'un camping-car AUTOSTAR neuf de la collection, l'adhésion au club est offerte la première année !
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Nos Objectifs -->
+      <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-6 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>🎯</span> Les Objectifs du Club
+        </h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <div class="text-2xl mb-2">🤝</div>
+            <h3 class="font-bold text-slate-900 text-base mb-1">Entraide & Convivialité</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Permettre une meilleure pratique du camping-car dans un esprit d'échange d'expériences entre anciens et nouveaux camping-caristes.
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <div class="text-2xl mb-2">🗺️</div>
+            <h3 class="font-bold text-slate-900 text-base mb-1">Sorties & Voyages</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Bénéficier d'un programme annuel de rassemblements et circuits en France ou à l'étranger, parfaitement organisés et sécurisés.
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <div class="text-2xl mb-2">🛠️</div>
+            <h3 class="font-bold text-slate-900 text-base mb-1">Fiches "C'est pas sorcier"</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Recevoir des parutions et fiches techniques rédigées par des membres bricoleurs pour entretenir et améliorer votre véhicule.
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-lg border border-slate-100">
+            <div class="text-2xl mb-2">🛡️</div>
+            <h3 class="font-bold text-slate-900 text-base mb-1">Défense des Intérêts</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Représenter les adhérents et préserver leurs droits de pratique du camping-car grâce à notre affiliation à la FFACCC.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Bureau & Organigramme -->
+      <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>👥</span> Le Bureau et le Conseil d'Administration
+        </h2>
+        <p class="text-sm text-slate-600 mb-6">
+          Le Club Autostar est administré par des bénévoles élus en Assemblée Générale et assisté de délégués régionaux.
+        </p>
+
+        <!-- Cartes des membres du bureau (à personnaliser si besoin) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+          <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
+            <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+              P
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm">Président</h4>
+            <p class="text-xs text-slate-500">Bureau National</p>
+          </div>
+
+          <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
+            <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+              VP
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm">Vice-Président</h4>
+            <p class="text-xs text-slate-500">Coordination des sorties</p>
+          </div>
+
+          <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
+            <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
+              T
+            </div>
+            <h4 class="font-bold text-slate-900 text-sm">Trésorier</h4>
+            <p class="text-xs text-slate-500">Gestion des adhésions</p>
+          </div>
+        </div>
+
+        <div class="text-center">
+          <a 
+            href="/uploads/organigramme-club-autostar.pdf" 
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-lg transition-colors border border-slate-300"
+          >
+            📥 Télécharger l'organigramme complet du club (PDF)
+          </a>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Sidebar Latérale -->
+    <div class="space-y-6">
+      
+      <!-- Bloc Adhésion Rapide -->
+      <div class="bg-red-700 text-white p-6 rounded-xl shadow-md">
+        <h3 class="text-xl font-bold mb-2">Rejoignez le Club !</h3>
+        <p class="text-xs text-red-100 mb-4 leading-relaxed">
+          Vous possédez un camping-car AUTOSTAR ? Venez partager vos voyages et profiter des avantages réservés aux adhérents.
+        </p>
+        <a 
+          href="/adhésion" 
+          class="block text-center w-full bg-white text-red-700 hover:bg-red-50 font-bold text-sm py-2.5 px-4 rounded-lg transition-colors shadow-sm"
+        >
+          Découvrir les tarifs & adhésion
+        </a>
+      </div>
+
+      <!-- Bloc Affiliation FFACCC -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="text-3xl">🇫🇷</span>
+          <div>
+            <h4 class="font-bold text-slate-900 text-sm">Club Affilié FFACCC</h4>
+            <p class="text-xs text-slate-500">Fédération Française des Associations et Clubs de Camping-Cars</p>
+          </div>
+        </div>
+        <p class="text-xs text-slate-600 mb-4 leading-relaxed">
+          En adhérant au Club Autostar, vous bénéficiez également des services et avantages accordés par la FFACCC (carte de membre, assurances, revues spécialisées).
+        </p>
+        <a 
+          href="https://www.ffaccc.fr" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="text-xs font-semibold text-red-700 hover:underline flex items-center gap-1"
+        >
+          En savoir plus sur la FFACCC ↗
+        </a>
+      </div>
+
+      <!-- Bloc Coordonnées du Siège -->
+      <div class="bg-slate-50 p-6 rounded-xl border border-slate-200 text-xs space-y-3">
+        <h4 class="font-bold text-slate-900 text-sm border-b pb-2">Siège Social & Contact</h4>
+        <p class="text-slate-600"><strong>Club Autostar</strong></p>
+        <p class="text-slate-600">ZI du Launay, 22800 Saint-Brandan</p>
+        <p class="text-slate-600">📞 Téléphone : 02 96 79 60 35</p>
+        <p class="text-slate-600">✉️ Email : autostar.club@wanadoo.fr</p>
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>
