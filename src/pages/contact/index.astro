@@ -1,0 +1,251 @@
+---
+// src/pages/contact.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Contact" 
+  description="Contactez le bureau du Club Autostar pour toute question sur l'adhésion, les sorties ou l'association."
+>
+  <!-- Hero Banner Contact -->
+  <div class="bg-slate-900 text-white p-8 md:p-12 rounded-xl mb-10 shadow-lg">
+    <div class="max-w-3xl">
+      <span class="inline-block bg-red-700 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
+        À votre écoute
+      </span>
+      <h1 class="text-3xl md:text-5xl font-extrabold mb-3">Contactez le Club Autostar</h1>
+      <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+        Une question sur une sortie, le renouvellement de votre adhésion ou le fonctionnement du club ? 
+        Remplissez le formulaire ci-dessous pour ouvrir votre messagerie.
+      </p>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+    
+    <!-- Colonne Gauche : Formulaire de Contact mailto -->
+    <div class="lg:col-span-2">
+      <div class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-2 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>✉️</span> Préparer votre message
+        </h2>
+        <p class="text-xs md:text-sm text-slate-600 mb-6">
+          Complétez ce formulaire. En cliquant sur le bouton, votre logiciel de messagerie s'ouvrira automatiquement avec votre texte prêt à être envoyé à <strong>autostar.club@wanadoo.fr</strong>.
+        </p>
+
+        <!-- Formulaire intercepté par le script -->
+        <form id="contact-form" class="space-y-5">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Nom & Prénom -->
+            <div>
+              <label for="name" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                Nom & Prénom <span class="text-red-600">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="name" 
+                name="name" 
+                required 
+                placeholder="Ex: Jean Dupont"
+                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              />
+            </div>
+
+            <!-- Email de contact -->
+            <div>
+              <label for="email" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                Votre Adresse Email <span class="text-red-600">*</span>
+              </label>
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                required 
+                placeholder="nom@exemple.fr"
+                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Téléphone -->
+            <div>
+              <label for="phone" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                Numéro de Téléphone
+              </label>
+              <input 
+                type="tel" 
+                id="phone" 
+                name="phone" 
+                placeholder="06 00 00 00 00"
+                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+              />
+            </div>
+
+            <!-- Sujet -->
+            <div>
+              <label for="subject_type" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+                Objet de la demande <span class="text-red-600">*</span>
+              </label>
+              <select 
+                id="subject_type" 
+                name="subject_type" 
+                required
+                class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent bg-white"
+              >
+                <option value="Adhésion">Renseignement Adhésion</option>
+                <option value="Sorties">Question sur une Sortie / Rassemblement</option>
+                <option value="Technique">Fiches "C'est pas sorcier" / Technique</option>
+                <option value="Autre">Autre demande</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Numéro d'adhérent (Optionnel) -->
+          <div>
+            <label for="member_id" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+              Numéro d'adhérent <span class="text-slate-400 font-normal">(Si déjà membre)</span>
+            </label>
+            <input 
+              type="text" 
+              id="member_id" 
+              name="member_id" 
+              placeholder="Ex: N° 1234"
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+            />
+          </div>
+
+          <!-- Message -->
+          <div>
+            <label for="message" class="block text-xs font-bold text-slate-700 uppercase mb-1">
+              Votre Message <span class="text-red-600">*</span>
+            </label>
+            <textarea 
+              id="message" 
+              name="message" 
+              rows="5" 
+              required 
+              placeholder="Rédigez votre message ici..."
+              class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-red-700 focus:border-transparent"
+            ></textarea>
+          </div>
+
+          <!-- Bouton d'envoi -->
+          <button 
+            type="submit" 
+            class="w-full sm:w-auto bg-red-700 hover:bg-red-800 text-white font-bold text-sm px-6 py-3 rounded-lg transition-colors shadow-md inline-flex items-center justify-center gap-2"
+          >
+            📬 Ouvrir dans ma messagerie (mailto)
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Colonne Droite : Coordonnées et Carte -->
+    <div class="space-y-6">
+      
+      <!-- Bloc Coordonnées Principales -->
+      <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+        <h3 class="font-bold text-slate-900 text-lg mb-4 pb-2 border-b border-slate-100">
+          Coordonnées du Siège
+        </h3>
+
+        <div class="space-y-4 text-sm text-slate-700">
+          <div class="flex items-start gap-3">
+            <span class="text-xl">📍</span>
+            <div>
+              <strong class="block text-slate-900 font-semibold">Adresse postale :</strong>
+              <p class="text-xs text-slate-600">
+                <strong>Club Autostar</strong><br />
+                Z.I. du Launay<br />
+                22800 Saint-Brandan (Côtes-d'Armor)
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="text-xl">📞</span>
+            <div>
+              <strong class="block text-slate-900 font-semibold">Téléphone :</strong>
+              <a href="tel:0296796035" class="text-xs text-red-700 font-bold hover:underline">
+                02 96 79 60 35
+              </a>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3">
+            <span class="text-xl">✉️</span>
+            <div>
+              <strong class="block text-slate-900 font-semibold">Adresse Email :</strong>
+              <a href="mailto:autostar.club@wanadoo.fr" class="text-xs text-red-700 font-bold hover:underline">
+                autostar.club@wanadoo.fr
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carte d'accès -->
+      <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+        <h4 class="font-bold text-slate-900 text-sm mb-3">Plan d'accès (Saint-Brandan)</h4>
+        <div class="w-full h-56 rounded-lg overflow-hidden border border-slate-200">
+          <iframe 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            scrolling="no" 
+            marginheight="0" 
+            marginwidth="0" 
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-2.8900%2C48.3750%2C-2.8500%2C48.3950&amp;layer=mapnik&amp;marker=48.3850%2C-2.8700" 
+            style="border: 0;"
+          ></iframe>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</BaseLayout>
+
+<!-- Script pour intercepter le formulaire et générer le lien mailto -->
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const name = formData.get('name') as string;
+      const email = formData.get('email') as string;
+      const phone = formData.get('phone') as string || 'Non renseigné';
+      const subjectType = formData.get('subject_type') as string;
+      const memberId = formData.get('member_id') as string || 'Non renseigné';
+      const message = formData.get('message') as string;
+
+      // Construction du sujet et du corps du mail
+      const emailSubject = encodeURIComponent(`[Club Autostar] Demande : ${subjectType} - ${name}`);
+      
+      const bodyText = 
+`Bonjour le Club Autostar,
+
+Voici un nouveau message envoyé depuis le site internet :
+
+Nom & Prénom : ${name}
+Email : ${email}
+Téléphone : ${phone}
+Numéro d'adhérent : ${memberId}
+Objet : ${subjectType}
+
+--------------------------------------------------
+MESSAGE :
+${message}
+--------------------------------------------------`;
+
+      const emailBody = encodeURIComponent(bodyText);
+
+      // Redirection mailto vers le client de messagerie de l'utilisateur
+      window.location.href = `mailto:autostar.club@wanadoo.fr?subject=${emailSubject}&body=${emailBody}`;
+    });
+  }
+</script>
