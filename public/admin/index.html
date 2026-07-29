@@ -16,35 +16,83 @@
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
     <!-- Dans public/admin/index.html -->
 <script>
-  CMS.registerEditorComponent({
+      CMS.registerEditorComponent({
     id: "image-text-block",
-    label: "Bloc Image + Texte côte à côte",
+    label: "Bloc Image + Texte",
     fields: [
       { name: "image", label: "Image", widget: "image" },
-      { name: "text", label: "Texte / Description", widget: "markdown" },
-      { name: "imagePosition", label: "Position de l'image", widget: "select", options: ["Gauche", "Droite"], default: "Gauche" }
+      { name: "text", label: "Texte / Description", widget: "markdown" }
     ],
-    pattern: /^<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center my-6 p-4 bg-slate-50 rounded-xl border border-slate-200">[\s\S]*?<\/div>/,
+
+    // Balise personnalisée <grid-block> que Decap CMS ne transformera jamais en HTML brut
+    pattern: /^<grid-block image="([\s\S]*?)">([\s\S]*?)<\/grid-block>$/,
+
     fromBlock: function(match) {
-      return {};
+      return {
+        image: match[1] ? match[1].trim() : "",
+        text: match[2] ? match[2].trim() : ""
+      };
     },
+
     toBlock: function(obj) {
-      return `
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center my-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
-  <img src="${obj.image}" class="rounded-lg shadow-sm w-full object-cover" />
-  <div>
-
-${obj.text}
-
-  </div>
-</div>`;
+      const img = obj.image || "";
+      const txt = obj.text || "";
+      return `<grid-block image="${img}">\n${txt}\n</grid-block>`;
     },
-    toPreview: function(obj) {
-      return `<div style="display:flex; gap:20px; align-items:center; background:#f8fafc; padding:15px;"><img src="${obj.image}" style="max-width:200px;"/><div>${obj.text}</div></div>`;
+
+    toPreview: function(obj, getAsset) {
+      const imagePath = obj.image || "";
+      const asset = imagePath ? getAsset(imagePath) : null;
+      const imageSrc = asset ? asset.toString() : "";
+      const text = obj.text || "*Aucun texte saisi*";
+
+      return `
+        <div style="display: flex; gap: 20px; align-items: center; background: #f8fafc; border: 1px solid #cbd5e1; padding: 16px; border-radius: 8px; margin: 16px 0;">
+          <div style="flex: 1; max-width: 220px;">
+            ${imageSrc 
+              ? `<img src="${imageSrc}" style="width: 100%; border-radius: 6px; display: block; object-fit: cover;" />` 
+              : `<div style="background: #e2e8f0; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 6px; color: #64748b; font-size: 12px;">Pas d'image</div>`
+            }
+          </div>
+          <div style="flex: 2; font-family: system-ui, sans-serif; font-size: 14px; color: #1e293b; line-height: 1.5;">
+            ${text}
+          </div>
+        </div>
+      `;
     }
   });
+  
+  
+        CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.20/src/index.min.js');
+      CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/tailwindcss@4.3.3/index.min.css');
 
-    CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+      // 2. STYLES PERSONNALISÉS SUPPLÉMENTAIRES POUR LES TITRES DANS L'APERÇU
+      CMS.registerPreviewStyle(`
+        .prose h1 { color: #0f172a; font-size: 1.875rem; font-weight: 800; border-bottom: 2px solid #b91c1c; padding-bottom: 0.5rem; margin-top: 1.5rem; }
+        .prose h2 { color: #1e293b; font-size: 1.5rem; font-weight: 700; margin-top: 1.25rem; }
+        .prose h3 { color: #334155; font-size: 1.25rem; font-weight: 600; margin-top: 1rem; }
+        .prose img { rounded-radius: 0.5rem; margin: 1rem 0; }
+      `, { raw: true });
+
+      // 3. CRÉER UN TEMPLATE D'APERÇU ENVELOPPÉ DANS LA CLASSE 'prose'
+      const CustomPreview = createClass({
+        render: function() {
+          const entry = this.props.entry;
+          const title = entry.getIn(['data', 'title']) || '';
+          const body = this.props.widgetFor('body');
+
+          return h('div', { className: 'p-6 max-w-4xl mx-auto font-sans text-slate-800' },
+            h('h1', { className: 'text-3xl font-extrabold text-slate-900 mb-4 border-b-2 border-red-700 pb-2' }, title),
+            // Conteneur typography prose
+            h('div', { className: 'prose prose-slate max-w-none' }, body)
+          );
+        }
+      });
+
+      // Appliquer ce template d'aperçu à vos collections
+      CMS.registerPreviewTemplate('sorties', CustomPreview);
+      CMS.registerPreviewTemplate('fiches', CustomPreview);
+      CMS.registerPreviewTemplate('pages', CustomPreview);
 
       // Widget personnalisé pour prévisualiser les images correctement
       const ImagePreview = createClass({

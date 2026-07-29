@@ -1,11 +1,12 @@
 ---
 // src/pages/fiches-pratiques/[slug].astro
+import Prose from '../../components/Prose.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const fiches = await getCollection('fiches');
-  return fiches.map((entry) => ({
+  return fiches.map((entry:any) => ({
     params: { slug:  entry.id },
     props: { entry },
   }));
@@ -79,7 +80,9 @@ const badgeClass = categoryColors[category] || categoryColors.Default;
 
       <!-- Contenu Markdown du tutoriel -->
       <div class="prose prose-slate max-w-none">
+        <Prose>
         <Content />
+        </Prose>
       </div>
     </div>
   </article>
