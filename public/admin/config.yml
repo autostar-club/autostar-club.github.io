@@ -49,6 +49,7 @@ collections:
       - { label: "Image d'illustration", name: "image", widget: "image", required: false }
       - { label: "Programme complet / Bulletin PDF", name: "pdfProgram", widget: "file", required: false }
       - { label: "Résumé succinct", name: "description", widget: "text" }
+      - { label: "Accessible en ligne (public)", name: "published", widget: "boolean", default: true }
       - { label: "Compte-rendu / Détails du programme", name: "body", widget: "richtext" }
 
   # -------------------------------------------------------------
@@ -74,5 +75,6 @@ collections:
       - { label: "Auteur (Membre du club)", name: "author", widget: "string", required: false }
       - { label: "Fiche PDF téléchargeable", name: "pdfFile", widget: "file", required: false }
       - { label: "Résumé de l'astuce", name: "description", widget: "text" }
-      - { label: "Explications détaillées", name: "body", widget: "markdown" }
+      - { label: "Accessible en ligne (public)", name: "published", widget: "boolean", default: true }
+      - { label: "Explications détaillées", name: "body", widget: "richtext" }
 

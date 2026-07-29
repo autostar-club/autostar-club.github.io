@@ -24,6 +24,7 @@ const sortiesCollection = defineCollection({
     pdfProgram: z.string().optional(),
     description: z.string(),
     slug: z.string().optional(),
+    published: z.boolean().default(true), // Champ pour indiquer si la fiche est publiée ou non
   }),
 });
 
@@ -37,6 +38,7 @@ const fichesCollection = defineCollection({
     author: z.string().optional(),
     pdfFile: z.string().optional(),
     description: z.string(),
+    published: z.boolean().default(true), // Champ pour indiquer si la fiche est publiée ou non
   }),
 });
 

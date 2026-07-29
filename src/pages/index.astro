@@ -7,7 +7,7 @@ import SortieCard from '../components/sorties/SortieCard.astro';
 import { getCollection } from 'astro:content';
 
 // Récupération dynamique des prochaines sorties gérées via Decap CMS
-const sortiesAVenir = await getCollection('sorties', ({ data }) => data.type === 'a-venir');
+const sortiesAVenir = await getCollection('sorties', ({ data }) => data.status === 'a-venir' && data.published === true);
 ---
 
 <BaseLayout title="Accueil">
