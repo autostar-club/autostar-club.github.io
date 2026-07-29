@@ -80,47 +80,78 @@ const { title, status, dateFormatted, location, organizers, image, pdfProgram, d
       </div>
     </div>
 
-    <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
-      <!-- Contenu HTML du Markdown (Programme détaillé) -->
-      <div class="lg:col-span-2 prose prose-slate max-w-none">
-        <h2 class="text-xl font-bold text-slate-900 mb-4 border-b pb-2">Programme & Détails</h2>
-        <Prose>
+    {status === 'ecoulee' ? (
+  /* -------------------------------------------------------------
+     1. AFFICHAGE PLEINE LARGEUR (Sortie écoulée)
+  ------------------------------------------------------------- */
+  <div class="p-6 md:p-10 space-y-6">
+    <!-- En-tête du compte-rendu avec bouton PDF si disponible -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
+      <h2 class="text-2xl font-bold text-slate-900">Compte-rendu & Souvenirs</h2>
+      
+      {pdfProgram && (
+        <a 
+          href={pdfProgram} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white text-xs sm:text-sm font-semibold py-2 px-4 rounded-lg transition-colors shadow-sm shrink-0 self-start sm:self-auto"
+        >
+          📄 Voir le programme archivé (PDF)
+        </a>
+      )}
+    </div>
+
+    <!-- Contenu Markdown en pleine largeur -->
+    <div class="prose prose-slate max-w-none">
+      <Prose>
         <Content />
-        </Prose>
-      </div>
+      </Prose>
+    </div>
+  </div>
+) : (
+  /* -------------------------------------------------------------
+     2. AFFICHAGE 2 COLONNES + SIDEBAR (Sortie à venir)
+  ------------------------------------------------------------- */
+  <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+    <!-- Contenu HTML du Markdown (Programme détaillé) -->
+    <div class="lg:col-span-2 prose prose-slate max-w-none">
+      <h2 class="text-xl font-bold text-slate-900 mb-4 border-b pb-2">Programme & Détails</h2>
+      <Prose>
+        <Content />
+      </Prose>
+    </div>
 
-      <!-- Bloc latéral d'action (Téléchargement & Inscription) -->
-      <div class="space-y-6">
-        {pdfProgram && (
-          <div class="bg-red-50 border border-red-200 rounded-xl p-5">
-            <h3 class="font-bold text-red-900 mb-2">Bulletin & Document PDF</h3>
-            <p class="text-xs text-red-700 mb-4">Téléchargez le programme détaillé et le bulletin d'engagement à retourner aux organisateurs.</p>
-            <a 
-              href={pdfProgram} 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="w-full inline-flex justify-center items-center gap-2 bg-red-700 hover:bg-red-800 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors"
-            >
-              📥 Télécharger le programme PDF
-            </a>
-          </div>
-        )}
+    <!-- Bloc latéral d'action (Téléchargement & Inscription) -->
+    <div class="space-y-6">
+      {pdfProgram && (
+        <div class="bg-red-50 border border-red-200 rounded-xl p-5">
+          <h3 class="font-bold text-red-900 mb-2">Bulletin & Document PDF</h3>
+          <p class="text-xs text-red-700 mb-4">Téléchargez le programme détaillé et le bulletin d'engagement à retourner aux organisateurs.</p>
+          <a 
+            href={pdfProgram} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-full inline-flex justify-center items-center gap-2 bg-red-700 hover:bg-red-800 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors"
+          >
+            📥 Télécharger le programme PDF
+          </a>
+        </div>
+      )}
 
-        {status === 'a-venir' && (
-          <div class="bg-slate-100 border border-slate-200 rounded-xl p-5">
-            <h3 class="font-bold text-slate-900 mb-2">Comment s'inscrire ?</h3>
-            <p class="text-xs text-slate-600 mb-4">
-              Les inscriptions aux sorties sont réservées aux adhérents du Club Autostar à jour de leur cotisation.
-            </p>
-            <a 
-              href="/sorties/inscription" 
-              class="w-full inline-flex justify-center items-center bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors"
-            >
-              Voir la procédure d'inscription
-            </a>
-          </div>
-        )}
+      <div class="bg-slate-100 border border-slate-200 rounded-xl p-5">
+        <h3 class="font-bold text-slate-900 mb-2">Comment s'inscrire ?</h3>
+        <p class="text-xs text-slate-600 mb-4">
+          Les inscriptions aux sorties sont réservées aux adhérents du Club Autostar à jour de leur cotisation.
+        </p>
+        <a 
+          href="/sorties/inscription" 
+          class="w-full inline-flex justify-center items-center bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors"
+        >
+          Voir la procédure d'inscription
+        </a>
       </div>
     </div>
+  </div>
+)}
   </article>
 </BaseLayout>
