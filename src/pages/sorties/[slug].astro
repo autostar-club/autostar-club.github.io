@@ -1,6 +1,8 @@
 ---
 // src/pages/sorties/[slug].astro
+import Prose from '../../components/Prose.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
 import { getCollection, render } from 'astro:content';
 
 // Génération de toutes les routes dynamiques des sorties
@@ -82,7 +84,9 @@ const { title, status, dateFormatted, location, organizers, image, pdfProgram, d
       <!-- Contenu HTML du Markdown (Programme détaillé) -->
       <div class="lg:col-span-2 prose prose-slate max-w-none">
         <h2 class="text-xl font-bold text-slate-900 mb-4 border-b pb-2">Programme & Détails</h2>
+        <Prose>
         <Content />
+        </Prose>
       </div>
 
       <!-- Bloc latéral d'action (Téléchargement & Inscription) -->
