@@ -25,6 +25,8 @@ collections:
     label: "Sorties & Rassemblements"
     label_singular: "Sortie"
     folder: "src/content/sorties"
+    extension: "mdx"       # <--- Important : on force l'extension MDX
+    format: "frontmatter"  # <--- Important pour que Decap gère bien le YAML + contenu
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
@@ -57,6 +59,8 @@ collections:
     label_singular: "Fiche pratique"
     folder: "src/content/fiches"
     create: true
+    extension: "mdx"       # <--- Important : on force l'extension MDX
+    format: "frontmatter"  # <--- Important pour que Decap gère bien le YAML + contenu
     slug: "{{slug}}"
     fields:
       - { label: "Titre du tutoriel/astuce", name: "title", widget: "string" }
@@ -72,26 +76,3 @@ collections:
       - { label: "Résumé de l'astuce", name: "description", widget: "text" }
       - { label: "Explications détaillées", name: "body", widget: "markdown" }
 
-  # -------------------------------------------------------------
-  # COLLECTION 3 : PAGES INSTITUTIONNELLES (Présentation, Adhésion...)
-  # -------------------------------------------------------------
-  - name: "pages"
-    label: "Pages du site"
-    files:
-      - file: "src/content/pages/presentation.md"
-        label: "Présentation du Club"
-        name: "presentation"
-        fields:
-          - { label: "Titre de la page", name: "title", widget: "string" }
-          - { label: "Description SEO", name: "description", widget: "string" }
-          - { label: "Contenu de la page", name: "body", widget: "markdown" }
-
-      - file: "src/content/pages/adhésion.md"
-        label: "Page Adhésion & Tarifs"
-        name: "adhésion"
-        fields:
-          - { label: "Titre de la page", name: "title", widget: "string" }
-          - { label: "Description SEO", name: "description", widget: "string" }
-          - { label: "Prix de la cotisation (€)", name: "cotisationPrice", widget: "string" }
-          - { label: "Bulletin d'adhésion PDF", name: "bulletinPdf", widget: "file" }
-          - { label: "Explications & Conditions", name: "body", widget: "markdown" }

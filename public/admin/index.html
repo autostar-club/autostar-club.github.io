@@ -7,12 +7,43 @@
     <meta name="robots" content="noindex" />
     <link href="config.yml" type="text/yaml" rel="cms-config-url" />
     <title>Administration — Club Autostar</title>
-    <!-- Script Netlify Identity (utile pour l'authentification si hébergé avec Netlify/Decap) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
+    
+
   </head>
   <body>
     <!-- Script principal de Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.1.2/dist/decap-cms.js"></script>
+    <!-- Dans public/admin/index.html -->
+<script>
+  CMS.registerEditorComponent({
+    id: "image-text-block",
+    label: "Bloc Image + Texte côte à côte",
+    fields: [
+      { name: "image", label: "Image", widget: "image" },
+      { name: "text", label: "Texte / Description", widget: "markdown" },
+      { name: "imagePosition", label: "Position de l'image", widget: "select", options: ["Gauche", "Droite"], default: "Gauche" }
+    ],
+    pattern: /^<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center my-6 p-4 bg-slate-50 rounded-xl border border-slate-200">[\s\S]*?<\/div>/,
+    fromBlock: function(match) {
+      return {};
+    },
+    toBlock: function(obj) {
+      return `
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center my-6 p-4 bg-slate-50 rounded-xl border border-slate-200">
+  <img src="${obj.image}" class="rounded-lg shadow-sm w-full object-cover" />
+  <div>
+
+${obj.text}
+
+  </div>
+</div>`;
+    },
+    toPreview: function(obj) {
+      return `<div style="display:flex; gap:20px; align-items:center; background:#f8fafc; padding:15px;"><img src="${obj.image}" style="max-width:200px;"/><div>${obj.text}</div></div>`;
+    }
+  });
+</script>
   </body>
 </html>
 
