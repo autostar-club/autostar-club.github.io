@@ -43,6 +43,21 @@ ${obj.text}
       return `<div style="display:flex; gap:20px; align-items:center; background:#f8fafc; padding:15px;"><img src="${obj.image}" style="max-width:200px;"/><div>${obj.text}</div></div>`;
     }
   });
+
+    CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+
+      // Widget personnalisé pour prévisualiser les images correctement
+      const ImagePreview = createClass({
+        render: function() {
+          const value = this.props.value;
+          if (!value) return null;
+          // Résolution du chemin pour l'aperçu CMS
+          const src = value.startsWith('/') ? value : '/' + value;
+          return h('img', { src: src, style: { maxWidth: '100%', height: 'auto', borderRadius: '8px' } });
+        }
+      });
+
+      CMS.registerWidget('custom-image', 'image', ImagePreview);
 </script>
   </body>
 </html>

@@ -49,7 +49,7 @@ collections:
       - { label: "Image d'illustration", name: "image", widget: "image", required: false }
       - { label: "Programme complet / Bulletin PDF", name: "pdfProgram", widget: "file", required: false }
       - { label: "Résumé succinct", name: "description", widget: "text" }
-      - { label: "Compte-rendu / Détails du programme", name: "body", widget: "markdown" }
+      - { label: "Compte-rendu / Détails du programme", name: "body", widget: "richtext" }
 
   # -------------------------------------------------------------
   # COLLECTION 2 : FICHES PRATIQUES "C'EST PAS SORCIER"

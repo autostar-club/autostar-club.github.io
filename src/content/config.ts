@@ -1,14 +1,22 @@
 // src/content/config.ts
 import { defineCollection, z } from 'astro:content';
 
+// Helper Zod qui transforme une Date ou une String en chaîne YYYY-MM-DD
+const dateStringSchema = z.union([z.string(), z.date()]).transform((val) => {
+  if (val instanceof Date) {
+    return val.toISOString().split('T')[0]; // Convertit l'objet Date en "YYYY-MM-DD"
+  }
+  return String(val);
+});
+
 // 1. Schéma des Sorties
 const sortiesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
     status: z.enum(['a-venir', 'ecoulee']),
-    startDate: z.string(),
-    endDate: z.string().optional(),
+    startDate: dateStringSchema,
+    endDate:dateStringSchema.optional(),
     dateFormatted: z.string(),
     location: z.string(),
     organizers: z.string().optional(),
@@ -25,7 +33,7 @@ const fichesCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     category: z.enum(['Électricité', 'Plomberie', 'Entretien', 'Accessoires', 'Sécurité', 'Mécanique']),
-    date: z.string(),
+    date: dateStringSchema,
     author: z.string().optional(),
     pdfFile: z.string().optional(),
     description: z.string(),
