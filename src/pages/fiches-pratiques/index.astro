@@ -4,7 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import FicheCard from '../../components/fiches/FicheCard.astro';
 import { getCollection } from 'astro:content';
 
-const allFiches = await getCollection('fiches');
+const allFiches = (await getCollection('fiches')).filter((fiche) => fiche.data.published === true); // Filtrer uniquement les fiches publiées
+
 
 // Tri des fiches de la plus récente à la plus ancienne
 const fiches = allFiches.sort(

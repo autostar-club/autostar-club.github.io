@@ -7,7 +7,7 @@ import { getCollection, render } from 'astro:content';
 
 // Génération de toutes les routes dynamiques des sorties
 export async function getStaticPaths() {
-  const sorties = await getCollection('sorties');
+  const sorties = (await getCollection('sorties')).filter((sortie) => sortie.data.published === true); // Filtrer uniquement les sorties publiées
   return sorties.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },

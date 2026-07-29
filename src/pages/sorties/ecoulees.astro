@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 const allSorties = await getCollection('sorties');
 
 const sortiesEcoulees = allSorties
-  .filter((s) => s.data.status === 'ecoulee')
+  .filter((s) => s.data.status === 'ecoulee'&& s.data.published === true)
   .sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime());
 ---
 

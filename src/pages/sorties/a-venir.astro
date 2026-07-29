@@ -7,7 +7,7 @@ import { getCollection } from 'astro:content';
 const allSorties = await getCollection('sorties');
 
 const sortiesAVenir = allSorties
-  .filter((s) => s.data.status === 'a-venir')
+  .filter((s) => s.data.status === 'a-venir' && s.data.published === true) // Filtrer uniquement les sorties à venir et publiées
   .sort((a, b) => new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime());
 ---
 
