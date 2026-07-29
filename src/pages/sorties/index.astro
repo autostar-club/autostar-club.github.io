@@ -1,0 +1,97 @@
+---
+// src/pages/sorties/index.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SortieCard from '../../components/sorties/SortieCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSorties = await getCollection('sorties');
+
+// Séparation des sorties à venir et des sorties passées
+const sortiesAVenir = allSorties
+  .filter((s) => s.data.status === 'a-venir')
+  .sort((a, b) => new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime());
+
+const sortiesEcoulees = allSorties
+  .filter((s) => s.data.status === 'ecoulee')
+  .sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime());
+---
+
+<BaseLayout 
+  title="Sorties & Rassemblements" 
+  description="Calendrier des sorties, voyages et rassemblements organisés par le Club Autostar."
+>
+  <!-- En-tête de section -->
+  <div class="bg-slate-900 text-white p-8 rounded-xl mb-8 shadow-md">
+    <div class="max-w-3xl">
+      <span class="text-xs font-bold uppercase tracking-wider text-red-400">Vie du Club</span>
+      <h1 class="text-3xl md:text-4xl font-extrabold mt-1 mb-3">Sorties & Rassemblements</h1>
+      <p class="text-slate-300 text-sm md:text-base leading-relaxed">
+        Retrouvez toutes les rencontres régionales, circuits touristiques et rassemblements nationaux. 
+        Partagez des moments de convivialité entre passionnés d'Autostar !
+      </p>
+      <div class="mt-6 flex flex-wrap gap-4">
+        <a 
+          href="/sorties/inscription" 
+          class="inline-flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-colors"
+        >
+          📝 Procédure d'inscription aux sorties
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Sorties à Venir -->
+  <section class="mb-14">
+    <div class="flex items-center justify-between mb-6 pb-2 border-b-2 border-red-700">
+      <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+        <span>📅</span> Sorties à venir ({sortiesAVenir.length})
+      </h2>
+    </div>
+
+    {sortiesAVenir.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortiesAVenir.map((sortie) => (
+          <SortieCard
+            title={sortie.data.title}
+            date={sortie.data.dateFormatted}
+            location={sortie.data.location}
+            slug={sortie.id}
+            image={sortie.data.image}
+            organizers={sortie.data.organizers}
+          />
+        ))}
+      </div>
+    ) : (
+      <div class="bg-white border border-slate-200 rounded-lg p-8 text-center text-slate-600">
+        <p class="text-lg font-medium">Aucune sortie programmée pour le moment.</p>
+        <p class="text-sm text-slate-500 mt-1">Le bureau prépare le calendrier. Revenez très bientôt !</p>
+      </div>
+    )}
+  </section>
+
+  <!-- Section Sorties Écouleés / Historique -->
+  <section>
+    <div class="flex items-center justify-between mb-6 pb-2 border-b-2 border-slate-400">
+      <h2 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+        <span>📸</span> Sorties écoulées ({sortiesEcoulees.length})
+      </h2>
+    </div>
+
+    {sortiesEcoulees.length > 0 ? (
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-90">
+        {sortiesEcoulees.map((sortie) => (
+          <SortieCard
+            title={sortie.data.title}
+            date={sortie.data.dateFormatted}
+            location={sortie.data.location}
+            slug={sortie.id}
+            image={sortie.data.image}
+            organizers={sortie.data.organizers}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="text-slate-500 text-sm">Aucune sortie archivée.</p>
+    )}
+  </section>
+</BaseLayout>

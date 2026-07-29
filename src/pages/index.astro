@@ -1,11 +1,52 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import "../styles/global.css";
+// src/pages/index.astro
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSlider from '../components/home/HeroSlider.vue';
+import SortieCard from '../components/sorties/SortieCard.astro';
+import { getCollection } from 'astro:content';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Récupération dynamique des prochaines sorties gérées via Decap CMS
+const sortiesAVenir = await getCollection('sorties', ({ data }) => data.type === 'a-venir');
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout title="Accueil">
+  <!-- Bannières / Slider -->
+  <section class="mb-10">
+    <HeroSlider client:visible />
+  </section>
+
+  <!-- Mot de bienvenue -->
+  <section class="bg-white p-8 rounded-lg shadow-sm border border-slate-200 mb-10">
+    <h1 class="text-3xl font-bold text-red-700 mb-4">Bienvenue sur le site du Club Autostar</h1>
+    <p class="text-slate-700 leading-relaxed mb-4">
+      Créé en 1987, le Club Autostar réunit les propriétaires et utilisateurs de camping-cars AUTOSTAR dans un esprit de convivialité et d'échange d'expériences.
+    </p>
+    <a href="/presentation" class="inline-block bg-slate-800 text-white text-sm px-4 py-2 rounded hover:bg-slate-700">
+      En savoir plus sur l'association →
+    </a>
+  </section>
+
+  <!-- Section Prochaines Sorties -->
+  <section>
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold text-slate-800">Prochaines Sorties</h2>
+      <a href="/sorties/a-venir" class="text-red-700 hover:underline text-sm font-semibold">
+        Toutes les sorties →
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {sortiesAVenir.slice(0, 3).map((sortie:any) => (
+        <SortieCard 
+          title={sortie.data.title}
+          date={sortie.data.date}
+          location={sortie.data.location}
+          slug={sortie.slug}
+          image={sortie.data.image}
+          organizers={sortie.data.organizers}
+        />
+      ))}
+    </div>
+  </section>
+</BaseLayout>

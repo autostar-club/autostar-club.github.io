@@ -1,0 +1,28 @@
+---
+// src/components/sorties/SortieCard.astro
+interface Props {
+  title: string;
+  date: string;
+  location: string;
+  image?: string;
+  slug: string;
+  organizers?: string;
+}
+
+const { title, date, location, image, slug, organizers } = Astro.props;
+---
+
+<article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow border border-slate-100 flex flex-col">
+  {image && <img src={image} alt={title} class="h-48 w-full object-cover" />}
+  <div class="p-5 flex-grow flex flex-col justify-between">
+    <div>
+      <span class="text-xs font-semibold text-red-600 uppercase tracking-wide">{date}</span>
+      <h3 class="text-xl font-bold text-slate-800 mt-1 mb-2">{title}</h3>
+      <p class="text-sm text-slate-600 mb-2">📍 {location}</p>
+      {organizers && <p class="text-xs text-slate-500 italic mb-4">Organisé par : {organizers}</p>}
+    </div>
+    <a href={`/sorties/${slug}`} class="inline-block text-center bg-red-700 hover:bg-red-800 text-white text-sm font-medium py-2 px-4 rounded transition-colors mt-4">
+      Voir le programme
+    </a>
+  </div>
+</article>

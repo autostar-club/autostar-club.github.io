@@ -1,0 +1,70 @@
+---
+// src/components/fiches/FicheCard.astro
+interface Props {
+  title: string;
+  category: string;
+  description: string;
+  date?: string;
+  pdfUrl?: string; // Lien direct vers un PDF téléchargé via Decap CMS
+  slug?: string;   // Ou lien vers la page détaillée de la fiche
+}
+
+const { title, category, description, date, pdfUrl, slug } = Astro.props;
+
+// Couleurs de badge dynamiques selon la catégorie
+const categoryColors: Record<string, string> = {
+  Électricité: 'bg-amber-100 text-amber-800 border-amber-300',
+  Plomberie: 'bg-blue-100 text-blue-800 border-blue-300',
+  Entretien: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+  Accessoires: 'bg-purple-100 text-purple-800 border-purple-300',
+  Default: 'bg-slate-100 text-slate-800 border-slate-300',
+};
+
+const badgeClass = categoryColors[category] || categoryColors.Default;
+---
+
+<article class="bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-all p-5 flex flex-col justify-between h-full">
+  <div>
+    <!-- Badge Catégorie & Date -->
+    <div class="flex items-center justify-between mb-3">
+      <span class={`text-xs font-semibold px-2.5 py-0.5 rounded-full border ${badgeClass}`}>
+        {category}
+      </span>
+      {date && <span class="text-xs text-slate-400">{date}</span>}
+    </div>
+
+    <!-- Titre -->
+    <h3 class="text-lg font-bold text-slate-900 mb-2 hover:text-red-700 transition-colors">
+      {slug ? <a href={`/fiches/${slug}`}>{title}</a> : title}
+    </h3>
+
+    <!-- Description -->
+    <p class="text-sm text-slate-600 line-clamp-3 mb-4">
+      {description}
+    </p>
+  </div>
+
+  <!-- Actions -->
+  <div class="pt-4 border-t border-slate-100 flex items-center justify-between mt-auto">
+    {pdfUrl ? (
+      <a
+        href={pdfUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-1.5 text-xs font-semibold text-red-700 hover:text-red-800 transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        Télécharger la fiche (PDF)
+      </a>
+    ) : slug ? (
+      <a
+        href={`/fiches/${slug}`}
+        class="inline-flex items-center gap-1 text-xs font-semibold text-slate-700 hover:text-red-700 transition-colors"
+      >
+        Lire le tutoriel →
+      </a>
+    ) : null}
+  </div>
+</article>

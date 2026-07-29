@@ -1,0 +1,58 @@
+---
+// src/pages/sorties/a-venir.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SortieCard from '../../components/sorties/SortieCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSorties = await getCollection('sorties');
+
+const sortiesAVenir = allSorties
+  .filter((s) => s.data.status === 'a-venir')
+  .sort((a, b) => new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime());
+---
+
+<BaseLayout 
+  title="Sorties à venir" 
+  description="Consultez le calendrier des prochaines sorties et rassemblements du Club Autostar."
+>
+  <!-- En-tête -->
+  <div class="bg-slate-900 text-white p-8 rounded-xl mb-8 shadow-md">
+    <span class="text-xs font-bold uppercase tracking-wider text-red-400">Agenda</span>
+    <h1 class="text-3xl md:text-4xl font-extrabold mt-1 mb-2">Prochaines Sorties & Rassemblements</h1>
+    <p class="text-slate-300 text-sm md:text-base max-w-2xl">
+      Découvrez les destinations à venir. Téléchargez les programmes et bulletins d'inscription pour nous rejoindre !
+    </p>
+    
+    <div class="mt-6 flex flex-wrap gap-4 text-sm">
+      <a href="/sorties/inscription" class="bg-red-700 hover:bg-red-800 text-white font-semibold px-4 py-2 rounded-lg transition-colors">
+        📝 Procédure d'inscription
+      </a>
+      <a href="/sorties/ecoulees" class="bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium px-4 py-2 rounded-lg transition-colors">
+        Voir l'historique des sorties écoulées →
+      </a>
+    </div>
+  </div>
+
+  <!-- Grille des sorties à venir -->
+  {sortiesAVenir.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortiesAVenir.map((sortie) => (
+        <SortieCard
+          title={sortie.data.title}
+          date={sortie.data.dateFormatted}
+          location={sortie.data.location}
+          slug={ sortie.id}
+          image={sortie.data.image}
+          organizers={sortie.data.organizers}
+        />
+      ))}
+    </div>
+  ) : (
+    <div class="bg-white border border-slate-200 rounded-xl p-10 text-center text-slate-600 my-8">
+      <p class="text-lg font-bold text-slate-800">Aucune sortie programmée pour le moment</p>
+      <p class="text-sm text-slate-500 mt-2">
+        Le bureau prépare le calendrier des prochains rassemblements. Revenez régulièrement consulter cette page !
+      </p>
+    </div>
+  )}
+</BaseLayout>

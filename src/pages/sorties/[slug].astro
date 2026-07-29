@@ -1,0 +1,122 @@
+---
+// src/pages/sorties/[slug].astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+// Génération de toutes les routes dynamiques des sorties
+export async function getStaticPaths() {
+  const sorties = await getCollection('sorties');
+  return sorties.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const { title, status, dateFormatted, location, organizers, image, pdfProgram, description } = entry.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <!-- Bouton Retour -->
+  <div class="mb-6">
+    <a href="/sorties" class="inline-flex items-center text-sm font-semibold text-slate-600 hover:text-red-700 transition-colors">
+      ← Retour au calendrier des sorties
+    </a>
+  </div>
+
+  <article class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    <!-- Image de couverture -->
+    {image && (
+      <div class="relative h-64 md:h-96 w-full">
+        <img src={image} alt={title} class="w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+        <div class="absolute bottom-6 left-6 right-6 text-white">
+          <span class={`inline-block text-xs font-bold px-3 py-1 rounded-full uppercase mb-2 ${status === 'a-venir' ? 'bg-emerald-600' : 'bg-slate-700'}`}>
+            {status === 'a-venir' ? 'Sortie à venir' : 'Sortie écoulée'}
+          </span>
+          <h1 class="text-2xl md:text-4xl font-extrabold">{title}</h1>
+        </div>
+      </div>
+    )}
+
+    <!-- En-tête sans image -->
+    {!image && (
+      <div class="p-8 bg-slate-900 text-white">
+        <span class={`inline-block text-xs font-bold px-3 py-1 rounded-full uppercase mb-2 ${status === 'a-venir' ? 'bg-emerald-600' : 'bg-slate-700'}`}>
+          {status === 'a-venir' ? 'Sortie à venir' : 'Sortie écoulée'}
+        </span>
+        <h1 class="text-3xl font-bold">{title}</h1>
+      </div>
+    )}
+
+    <!-- Panneau d'informations pratiques -->
+    <div class="bg-slate-50 p-6 border-b border-slate-200 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-red-100 text-red-700 rounded-lg text-xl">🗓️</div>
+        <div>
+          <span class="block font-semibold text-slate-900">Dates :</span>
+          <span class="text-slate-600">{dateFormatted}</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-red-100 text-red-700 rounded-lg text-xl">📍</div>
+        <div>
+          <span class="block font-semibold text-slate-900">Lieu :</span>
+          <span class="text-slate-600">{location}</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3">
+        <div class="p-3 bg-red-100 text-red-700 rounded-lg text-xl">👤</div>
+        <div>
+          <span class="block font-semibold text-slate-900">Organisateur(s) :</span>
+          <span class="text-slate-600">{organizers || 'Bureau du Club'}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="p-6 md:p-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <!-- Contenu HTML du Markdown (Programme détaillé) -->
+      <div class="lg:col-span-2 prose prose-slate max-w-none">
+        <h2 class="text-xl font-bold text-slate-900 mb-4 border-b pb-2">Programme & Détails</h2>
+        <Content />
+      </div>
+
+      <!-- Bloc latéral d'action (Téléchargement & Inscription) -->
+      <div class="space-y-6">
+        {pdfProgram && (
+          <div class="bg-red-50 border border-red-200 rounded-xl p-5">
+            <h3 class="font-bold text-red-900 mb-2">Bulletin & Document PDF</h3>
+            <p class="text-xs text-red-700 mb-4">Téléchargez le programme détaillé et le bulletin d'engagement à retourner aux organisateurs.</p>
+            <a 
+              href={pdfProgram} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full inline-flex justify-center items-center gap-2 bg-red-700 hover:bg-red-800 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors"
+            >
+              📥 Télécharger le programme PDF
+            </a>
+          </div>
+        )}
+
+        {status === 'a-venir' && (
+          <div class="bg-slate-100 border border-slate-200 rounded-xl p-5">
+            <h3 class="font-bold text-slate-900 mb-2">Comment s'inscrire ?</h3>
+            <p class="text-xs text-slate-600 mb-4">
+              Les inscriptions aux sorties sont réservées aux adhérents du Club Autostar à jour de leur cotisation.
+            </p>
+            <a 
+              href="/sorties/inscription" 
+              class="w-full inline-flex justify-center items-center bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold py-2.5 px-4 rounded-lg transition-colors"
+            >
+              Voir la procédure d'inscription
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </article>
+</BaseLayout>

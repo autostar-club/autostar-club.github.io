@@ -1,0 +1,20 @@
+---
+// src/components/layout/Header.astro
+import Navbar from './Navbar.vue';
+---
+
+<header class="w-full">
+  <!-- Barres d'infos haut de page -->
+  <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4">
+    <div class="container mx-auto flex justify-between items-center">
+      <div>Club affilié FFACCC | Saint-Brandan (22)</div>
+      <div class="space-x-4">
+        <a href="/contact" class="hover:underline">Contact</a>
+        <a href="/admin/" class="hover:underline text-amber-400">Espace Éditeur (Decap CMS)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Composant Vue interactif (hydratation côté client avec client:load) -->
+  <Navbar client:load />
+</header>

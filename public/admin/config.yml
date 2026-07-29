@@ -1,0 +1,91 @@
+# public/admin/config.yml
+backend:
+  name: github
+  repo: VOTRE_ORGANISATION/autostar-club # Remplacez par votre dépôt GitHub
+  branch: main # Branche principale de déploiement
+
+# Stockage des images et médias importés via le CMS
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+# Localisation en français
+locale: 'fr'
+
+collections:
+  # -------------------------------------------------------------
+  # COLLECTION 1 : LES SORTIES & RASSEMBLEMENTS
+  # -------------------------------------------------------------
+  - name: "sorties"
+    label: "Sorties & Rassemblements"
+    label_singular: "Sortie"
+    folder: "src/content/sorties"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { label: "Titre de la sortie", name: "title", widget: "string" }
+      - { 
+          label: "Statut", 
+          name: "status", 
+          widget: "select", 
+          options: [
+            { label: "À venir", value: "a-venir" }, 
+            { label: "Écoulée / Passée", value: "ecoulee" }
+          ],
+          default: "a-venir"
+        }
+      - { label: "Date de début", name: "startDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Date de fin", name: "endDate", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, required: false }
+      - { label: "Date affichée (ex: Du 12 au 15 Mai 2026)", name: "dateFormatted", widget: "string" }
+      - { label: "Lieu / Département (ex: Saint-Malo - 35)", name: "location", widget: "string" }
+      - { label: "Organisateur(s)", name: "organizers", widget: "string", required: false }
+      - { label: "Image d'illustration", name: "image", widget: "image", required: false }
+      - { label: "Programme complet / Bulletin PDF", name: "pdfProgram", widget: "file", required: false }
+      - { label: "Résumé succinct", name: "description", widget: "text" }
+      - { label: "Compte-rendu / Détails du programme", name: "body", widget: "markdown" }
+
+  # -------------------------------------------------------------
+  # COLLECTION 2 : FICHES PRATIQUES "C'EST PAS SORCIER"
+  # -------------------------------------------------------------
+  - name: "fiches"
+    label: "Fiches 'C'est pas sorcier'"
+    label_singular: "Fiche pratique"
+    folder: "src/content/fiches"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Titre du tutoriel/astuce", name: "title", widget: "string" }
+      - { 
+          label: "Catégorie", 
+          name: "category", 
+          widget: "select", 
+          options: ["Électricité", "Plomberie", "Entretien", "Accessoires", "Sécurité", "Mécanique"] 
+        }
+      - { label: "Date de publication", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false }
+      - { label: "Auteur (Membre du club)", name: "author", widget: "string", required: false }
+      - { label: "Fiche PDF téléchargeable", name: "pdfFile", widget: "file", required: false }
+      - { label: "Résumé de l'astuce", name: "description", widget: "text" }
+      - { label: "Explications détaillées", name: "body", widget: "markdown" }
+
+  # -------------------------------------------------------------
+  # COLLECTION 3 : PAGES INSTITUTIONNELLES (Présentation, Adhésion...)
+  # -------------------------------------------------------------
+  - name: "pages"
+    label: "Pages du site"
+    files:
+      - file: "src/content/pages/presentation.md"
+        label: "Présentation du Club"
+        name: "presentation"
+        fields:
+          - { label: "Titre de la page", name: "title", widget: "string" }
+          - { label: "Description SEO", name: "description", widget: "string" }
+          - { label: "Contenu de la page", name: "body", widget: "markdown" }
+
+      - file: "src/content/pages/adhésion.md"
+        label: "Page Adhésion & Tarifs"
+        name: "adhésion"
+        fields:
+          - { label: "Titre de la page", name: "title", widget: "string" }
+          - { label: "Description SEO", name: "description", widget: "string" }
+          - { label: "Prix de la cotisation (€)", name: "cotisationPrice", widget: "string" }
+          - { label: "Bulletin d'adhésion PDF", name: "bulletinPdf", widget: "file" }
+          - { label: "Explications & Conditions", name: "body", widget: "markdown" }

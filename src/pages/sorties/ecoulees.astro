@@ -1,0 +1,52 @@
+---
+// src/pages/sorties/ecoulees.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SortieCard from '../../components/sorties/SortieCard.astro';
+import { getCollection } from 'astro:content';
+
+const allSorties = await getCollection('sorties');
+
+const sortiesEcoulees = allSorties
+  .filter((s) => s.data.status === 'ecoulee')
+  .sort((a, b) => new Date(b.data.startDate).getTime() - new Date(a.data.startDate).getTime());
+---
+
+<BaseLayout 
+  title="Sorties écoulées" 
+  description="Historique et comptes-rendus des sorties passées du Club Autostar."
+>
+  <!-- En-tête -->
+  <div class="bg-slate-800 text-white p-8 rounded-xl mb-8 shadow-md">
+    <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Archives & Souvenirs</span>
+    <h1 class="text-3xl md:text-4xl font-extrabold mt-1 mb-2">Sorties Écoulées</h1>
+    <p class="text-slate-300 text-sm md:text-base max-w-2xl">
+      Retrouvez les détails et comptes-rendus des anciens rassemblements et circuits effectués par les adhérents du club.
+    </p>
+
+    <div class="mt-6">
+      <a href="/sorties/a-venir" class="text-sm text-red-400 hover:text-red-300 font-semibold underline">
+        ← Consulter les prochaines sorties à venir
+      </a>
+    </div>
+  </div>
+
+  <!-- Grille des sorties écoulées -->
+  {sortiesEcoulees.length > 0 ? (
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortiesEcoulees.map((sortie) => (
+        <SortieCard
+          title={sortie.data.title}
+          date={sortie.data.dateFormatted}
+          location={sortie.data.location}
+          slug={sortie.id}
+          image={sortie.data.image}
+          organizers={sortie.data.organizers}
+        />
+      ))}
+    </div>
+  ) : (
+    <div class="bg-white border border-slate-200 rounded-xl p-10 text-center text-slate-600 my-8">
+      <p class="text-lg font-bold text-slate-800">Aucune sortie archivée</p>
+    </div>
+  )}
+</BaseLayout>

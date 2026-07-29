@@ -1,0 +1,56 @@
+---
+// src/pages/sorties/inscription.astro
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout 
+  title="Procédure d'inscription aux sorties" 
+  description="Modalités et conditions pour participer aux sorties du Club Autostar."
+>
+  <div class="max-w-4xl mx-auto bg-white p-8 md:p-10 rounded-xl shadow-sm border border-slate-200">
+    <div class="border-b border-slate-200 pb-4 mb-6">
+      <span class="text-xs font-bold text-red-700 uppercase tracking-wider">Guide Adhérent</span>
+      <h1 class="text-3xl font-extrabold text-slate-900 mt-1">Procédure d'inscription aux sorties</h1>
+    </div>
+
+    <div class="prose prose-slate max-w-none space-y-6">
+      <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+        <p class="text-sm text-amber-900 font-medium m-0">
+          <strong>Rappel important :</strong> Seuls les membres à jour de leur cotisation annuelle auprès du Club Autostar peuvent participer aux sorties et rassemblements.
+        </p>
+      </div>
+
+      <h2 class="text-xl font-bold text-slate-900">Étape 1 : Choix de la sortie</h2>
+      <p>
+        Consultez le <a href="/sorties" class="text-red-700 underline">calendrier des sorties</a> pour prendre connaissance des dates, du lieu et du nombre d'équipages maximum.
+      </p>
+
+      <h2 class="text-xl font-bold text-slate-900">Étape 2 : Téléchargement du programme & engagement</h2>
+      <p>
+        Sur la fiche de la sortie choisie, téléchargez le bulletin d'inscription spécifique (au format PDF). 
+        Complétez-le lisiblement en indiquant :
+      </p>
+      <ul class="list-disc pl-5 text-sm space-y-1 text-slate-700">
+        <li>Vos nom et prénom ainsi que ceux des accompagnateurs.</li>
+        <li>Votre numéro d'adhérent.</li>
+        <li>Vos coordonnées (téléphone portable et email).</li>
+        <li>L'immatriculation et le modèle de votre camping-car AUTOSTAR.</li>
+      </ul>
+
+      <h2 class="text-xl font-bold text-slate-900">Étape 3 : Envoi et règlement</h2>
+      <p>
+        Retournez le coupon accompagné de votre chèque de règlement à l'adresse de l'organisateur indiquée sur la fiche de la sortie avant la date limite de réservation.
+      </p>
+
+      <div class="bg-slate-50 border border-slate-200 p-6 rounded-lg mt-8">
+        <h3 class="text-base font-bold text-slate-900 mb-2">Des questions sur une sortie ?</h3>
+        <p class="text-sm text-slate-600 mb-4">
+          Vous pouvez contacter le secrétariat du club ou l'organisateur mentionné sur la fiche.
+        </p>
+        <a href="/contact" class="inline-block bg-slate-900 text-white text-xs font-semibold px-4 py-2 rounded-md hover:bg-slate-800">
+          Contacter le secrétariat
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
