@@ -8,7 +8,7 @@ const allSorties = await getCollection('sorties');
 
 // Séparation des sorties à venir et des sorties passées
 const sortiesAVenir = allSorties
-  .filter((s) => s.data.status === 'a-venir')
+  .filter((s) => s.data.status === 'a-venir' && s.data.published === true) // Filtrer uniquement les sorties à venir et publiées
   .sort((a, b) => new Date(a.data.startDate).getTime() - new Date(b.data.startDate).getTime());
 
 const sortiesEcoulees = allSorties
