@@ -29,6 +29,29 @@ collections:
     format: "frontmatter"  # <--- Important pour que Decap gère bien le YAML + contenu
     create: true
     slug: "{{year}}-{{month}}-{{slug}}"
+    sortable_fields: ['title', 'startDate', 'status', 'published', 'commit_date']
+
+    # 2. BOUTONS DE FILTRE rapides en haut de l'admin
+    view_filters:
+      - label: "Publiées"
+        field: "published"
+        pattern: true
+      - label: "Non publiées (Brouillons)"
+        field: "published"
+        pattern: false
+      - label: "Sorties À venir"
+        field: "status"
+        pattern: "a-venir"
+      - label: "Sorties Écoulées"
+        field: "status"
+        pattern: "ecoulee"
+
+    # 3. GROUPEMENT visuel des articles dans la liste
+    view_groups:
+      - label: "Par État de publication"
+        field: "published"
+      - label: "Par Statut (À venir / Écoulée)"
+        field: "status"
     fields:
       - { label: "Titre de la sortie", name: "title", widget: "string" }
       - { 
@@ -49,7 +72,8 @@ collections:
       - { label: "Image d'illustration", name: "image", widget: "image", required: false }
       - { label: "Programme complet / Bulletin PDF", name: "pdfProgram", widget: "file", required: false }
       - { label: "Résumé succinct", name: "description", widget: "text" }
-      - { label: "Accessible en ligne (public)", name: "published", widget: "boolean", default: true }
+      - { label: "Publier sur le site", name: "published", widget: "boolean", default: true,
+       hint: "Si décoché, la sortie sera masquée sur le site public." , required: false}
       - { label: "Compte-rendu / Détails du programme", name: "body", widget: "richtext" }
 
   # -------------------------------------------------------------
@@ -63,8 +87,37 @@ collections:
     extension: "mdx"       # <--- Important : on force l'extension MDX
     format: "frontmatter"  # <--- Important pour que Decap gère bien le YAML + contenu
     slug: "{{slug}}"
+
+    sortable_fields: ['title', 'date', 'category', 'published', 'commit_date']
+
+    # 2. Filtres rapides dans l'admin
+    view_filters:
+      - label: "Publiées"
+        field: "published"
+        pattern: true
+      - label: "Brouillons (Non publiées)"
+        field: "published"
+        pattern: false
+
+    # 3. Groupement visuel dans l'admin
+    view_groups:
+      - label: "Par État de publication"
+        field: "published"
+      - label: "Par Catégorie"
+        field: "category"
+
+
     fields:
       - { label: "Titre du tutoriel/astuce", name: "title", widget: "string" }
+      - { 
+          label: "Publier sur le site", 
+          name: "published", 
+          widget: "boolean", 
+          default: true,
+          
+          hint: "Si décoché, la fiche sera conservée en brouillon."
+          , required: false
+        }
       - { 
           label: "Catégorie", 
           name: "category", 
@@ -75,6 +128,5 @@ collections:
       - { label: "Auteur (Membre du club)", name: "author", widget: "string", required: false }
       - { label: "Fiche PDF téléchargeable", name: "pdfFile", widget: "file", required: false }
       - { label: "Résumé de l'astuce", name: "description", widget: "text" }
-      - { label: "Accessible en ligne (public)", name: "published", widget: "boolean", default: true }
       - { label: "Explications détaillées", name: "body", widget: "richtext" }
 

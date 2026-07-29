@@ -42,7 +42,7 @@ const sortiesAVenir = await getCollection('sorties', ({ data }) => data.status =
           title={sortie.data.title}
           date={sortie.data.date}
           location={sortie.data.location}
-          slug={sortie.slug}
+          slug={sortie.id}
           image={sortie.data.image}
           organizers={sortie.data.organizers}
         />
