@@ -7,7 +7,27 @@ import Navbar from './Navbar.vue';
   <!-- Barres d'infos haut de page -->
   <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4">
     <div class="container mx-auto flex justify-between items-center">
-      <div>Club affilié FFACCC | Saint-Brandan (22)</div>
+ <div class="flex items-center gap-3">
+        <a 
+          href="https://www.ffaccc.info/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1.5 hover:text-white transition-colors group"
+          title="Visiter le site officiel de la FFACCC (Fédération Française des Associations et Clubs de Camping-Cars)"
+        >
+          <!-- Petit logo FFACCC avec bords arrondis -->
+          <img 
+            src="/uploads/logoffaacc.avif" 
+            alt="Logo FFACCC" 
+            class="h-5 w-auto rounded object-contain bg-white/90 p-0.5 group-hover:scale-105 transition-transform" 
+          />
+          <span class="font-medium">Club affilié FFACCC</span>
+        </a>
+
+        <span class="text-slate-600 hidden sm:inline">|</span>
+        <span class="hidden sm:inline text-slate-400">Saint-Brandan (22)</span>
+      </div>
+
       <div class="space-x-4">
         <a href="/contact" class="hover:underline">Contact</a>
         <a href="/admin/index.html" class="hover:underline text-amber-400">Espace Éditeur (Decap CMS)</a>
