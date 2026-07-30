@@ -4,10 +4,17 @@
     <div class="container mx-auto px-4 flex justify-between items-center h-16">
       <!-- Logo / Slogan -->
       <a href="/" class="flex items-center gap-2 font-bold text-lg">
-        <span>Club Autostar</span>
+        <img 
+          src="/uploads/logo.webp" 
+          alt="Logo Club Autostar" 
+          class="h-10 w-auto rounded-lg object-contain bg-white p-0.5 shadow-sm group-hover:scale-105 transition-transform"
+        />
+           <!-- Textes -->
+        <div class="flex flex-col md:flex-row md:items-center gap-0.5 md:gap-2">
         <span class="hidden md:inline text-xs bg-red-800 px-2 py-1 rounded">
-          Toujours libres, jamais seuls
-        </span>
+            Toujours libres, jamais seuls
+          </span>
+        </div>
       </a>
 
       <!-- Menu Desktop -->
