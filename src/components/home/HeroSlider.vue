@@ -94,7 +94,7 @@ const slides: Slide[] = [
     title: 'Toujours libres, jamais seuls',
     subtitle: 'Rejoignez le Club Autostar et partagez la passion des voyages en camping-car.',
     badge: 'Vie du Club',
-    link: '/adhésion',
+    link: '/adhesion',
     ctaText: 'Rejoindre le Club'
   },
   {
