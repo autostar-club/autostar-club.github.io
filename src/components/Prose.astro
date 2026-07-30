@@ -1,11 +1,102 @@
 ---
+// src/components/Prose.astro
 ---
-<div class="prose prose-slate max-w-none  prose-p:text-justify prose-img:mx-auto mx-auto
+
+<div
+  class="prose-container prose prose-slate max-w-none prose-p:text-justify prose-img:mx-auto mx-auto
   prose-h1:text-3xl prose-h1:font-extrabold prose-h1:text-slate-900 prose-h1:border-b-2 prose-h1:border-red-700 prose-h1:pb-2
   prose-h2:text-2xl prose-h2:font-bold prose-h2:text-slate-800 prose-h2:mt-8
   prose-h3:text-xl prose-h3:font-semibold prose-h3:text-red-700
   prose-a:text-red-700 prose-a:font-semibold hover:prose-a:underline
-  prose-img:rounded-xl prose-img:shadow-sm"
+  prose-img:rounded-xl prose-img:shadow-sm prose-img:cursor-zoom-in hover:prose-img:opacity-90 transition-opacity"
 >  
   <slot />
 </div>
+
+<!-- Lightbox grand format -->
+<div 
+  id="lightbox-modal" 
+  class="fixed inset-0 z-50 hidden bg-black/90 backdrop-blur-md items-center justify-center p-2 sm:p-4 cursor-zoom-out select-none"
+  role="dialog"
+  aria-modal="true"
+>
+  <!-- Bouton de fermeture fixe en haut à droite pour ne pas grignoter de la hauteur d'image -->
+  <button 
+    id="lightbox-close" 
+    class="absolute top-3 right-4 sm:top-5 sm:right-6 text-white/70 hover:text-white text-4xl font-bold focus:outline-none transition-colors z-10"
+    aria-label="Fermer l'image"
+  >
+    &times;
+  </button>
+
+  <div class="relative w-full h-full flex flex-col items-center justify-center">
+    <!-- Image max : 95% de la largeur écran (95vw) et 90% de la hauteur écran (90vh) -->
+    <img 
+      id="lightbox-img" 
+      src="" 
+      alt="" 
+      class="max-w-[95vw] max-h-[90vh] w-auto h-auto object-contain rounded shadow-2xl transition-transform duration-200 scale-95"
+    />
+
+    <!-- Légende sous l'image -->
+    <p id="lightbox-caption" class="text-slate-200 text-xs sm:text-sm mt-2 text-center italic max-w-[90vw] shrink-0"></p>
+  </div>
+</div>
+
+<script>
+  function initLightbox() {
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const modalCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.getElementById('lightbox-close');
+
+    if (!modal || !modalImg) return;
+
+    const images = document.querySelectorAll('.prose-container img');
+
+    images.forEach((img) => {
+      const imageElement = img as HTMLImageElement;
+
+      imageElement.addEventListener('click', () => {
+        modalImg.src = imageElement.src;
+        modalImg.alt = imageElement.alt || '';
+        
+        if (modalCaption) {
+          modalCaption.textContent = imageElement.alt || '';
+        }
+
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+
+        requestAnimationFrame(() => {
+          modalImg.classList.remove('scale-95');
+          modalImg.classList.add('scale-100');
+        });
+      });
+    });
+
+    const closeModal = () => {
+      modalImg.classList.remove('scale-100');
+      modalImg.classList.add('scale-95');
+
+      setTimeout(() => {
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 150);
+    };
+
+    modal.addEventListener('click', closeModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeModal();
+      }
+    });
+  }
+
+  initLightbox();
+  document.addEventListener('astro:page-load', initLightbox);
+</script>

@@ -14,6 +14,21 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+
+const entrySlug = entry.id;
+
+// 2. Construction de l'URL vers l'interface d'édition Decap CMS
+const decapEditUrltmp = `/admin/index.html#/collections/fiches/entries/${entrySlug}` 
+let decapEditUrl='';
+if (decapEditUrltmp.endsWith('.mdx') ){
+  decapEditUrl = decapEditUrltmp.slice(0, -4); // Supprimer l'extension .mdx pour les fichiers MDX
+} else if (decapEditUrltmp.endsWith('.md') ){
+  decapEditUrl = decapEditUrltmp.slice(0, -3);
+}else{
+  decapEditUrl = decapEditUrltmp;
+}
+
+
 const { title, category, date, author, pdfFile, description } = entry.data;
 
 // Couleurs de badge selon la catégorie
@@ -29,12 +44,25 @@ const badgeClass = categoryColors[category] || categoryColors.Default;
 ---
 
 <BaseLayout title={title} description={description}>
-  <!-- Bouton Retour -->
-  <div class="mb-6">
+
+<div class="w-full flex items-center justify-between gap-4 mb-6">
+  <!-- Alignement à gauche -->
     <a href="/fiches-pratiques" class="inline-flex items-center text-sm font-semibold text-slate-600 hover:text-red-700 transition-colors">
       ← Retour aux fiches pratiques
     </a>
-  </div>
+
+  <!-- Alignement poussé tout à droite (ml-auto) -->
+  <a 
+    href={decapEditUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors shadow-sm ml-auto"
+    title="Modifier ce contenu dans Decap CMS"
+  >
+    ✏️ Modifier
+  </a>
+</div>
+
 
   <article class="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
     <!-- En-tête Fiche -->

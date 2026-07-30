@@ -66,33 +66,6 @@
         CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/@tailwindcss/typography@0.5.20/src/index.min.js');
       CMS.registerPreviewStyle('https://cdn.jsdelivr.net/npm/tailwindcss@4.3.3/index.min.css');
 
-      // 2. STYLES PERSONNALISÉS SUPPLÉMENTAIRES POUR LES TITRES DANS L'APERÇU
-      CMS.registerPreviewStyle(`
-        .prose h1 { color: #0f172a; font-size: 1.875rem; font-weight: 800; border-bottom: 2px solid #b91c1c; padding-bottom: 0.5rem; margin-top: 1.5rem; }
-        .prose h2 { color: #1e293b; font-size: 1.5rem; font-weight: 700; margin-top: 1.25rem; }
-        .prose h3 { color: #334155; font-size: 1.25rem; font-weight: 600; margin-top: 1rem; }
-        .prose img { rounded-radius: 0.5rem; margin: 1rem 0; }
-      `, { raw: true });
-
-      // 3. CRÉER UN TEMPLATE D'APERÇU ENVELOPPÉ DANS LA CLASSE 'prose'
-      const CustomPreview = createClass({
-        render: function() {
-          const entry = this.props.entry;
-          const title = entry.getIn(['data', 'title']) || '';
-          const body = this.props.widgetFor('body');
-
-          return h('div', { className: 'p-6 max-w-4xl mx-auto font-sans text-slate-800' },
-            h('h1', { className: 'text-3xl font-extrabold text-slate-900 mb-4 border-b-2 border-red-700 pb-2' }, title),
-            // Conteneur typography prose
-            h('div', { className: 'prose prose-slate max-w-none' }, body)
-          );
-        }
-      });
-
-      // Appliquer ce template d'aperçu à vos collections
-      CMS.registerPreviewTemplate('sorties', CustomPreview);
-      CMS.registerPreviewTemplate('fiches', CustomPreview);
-      CMS.registerPreviewTemplate('pages', CustomPreview);
 
       // Widget personnalisé pour prévisualiser les images correctement
       const ImagePreview = createClass({
@@ -106,6 +79,104 @@
       });
 
       CMS.registerWidget('custom-image', 'image', ImagePreview);
+
+         // 2. INJECTER LES RÈGLES EXACTES DE VOTRE COMPOSANT Prose.astro
+      CMS.registerPreviewStyle(`
+        /* Reproduction exacte du rendu Prose.astro */
+        .prose-preview-container {
+          max-width: 100% !important;
+          font-family: system-ui, -apple-system, sans-serif;
+          color: #334155;
+        }
+        
+        /* Justification du texte comme dans prose-p:text-justify */
+        .prose-preview-container p {
+          text-align: justify !important;
+        }
+
+        /* 🔴 FORCE L'AFFICHAGE DES PUCES (UL / OL) */
+        .prose-preview-container ul {
+          list-style-type: disc !important;
+          padding-left: 1.5rem !important;
+          margin-top: 1em !important;
+          margin-bottom: 1em !important;
+        }
+        .prose-preview-container ol {
+          list-style-type: decimal !important;
+          padding-left: 1.5rem !important;
+          margin-top: 1em !important;
+          margin-bottom: 1em !important;
+        }
+        .prose-preview-container li {
+          margin-top: 0.375em !important;
+          margin-bottom: 0.375em !important;
+        }
+
+        /* Titres identiques à Prose.astro */
+        .prose-preview-container h1 {
+          font-size: 1.875rem !important;
+          font-weight: 800 !important;
+          color: #0f172a !important;
+          border-bottom: 2px solid #b91c1c !important; /* Rouge Autostar */
+          padding-bottom: 0.5rem !important;
+          margin-top: 1.5rem !important;
+          margin-bottom: 1rem !important;
+        }
+        .prose-preview-container h2 {
+          font-size: 1.5rem !important;
+          font-weight: 700 !important;
+          color: #1e293b !important;
+          margin-top: 2rem !important;
+          margin-bottom: 0.75rem !important;
+        }
+        .prose-preview-container h3 {
+          font-size: 1.25rem !important;
+          font-weight: 600 !important;
+          color: #b91c1c !important; /* Rouge Autostar */
+          margin-top: 1.5rem !important;
+          margin-bottom: 0.5rem !important;
+        }
+
+        /* Liens */
+        .prose-preview-container a {
+          color: #b91c1c !important;
+          font-weight: 600 !important;
+          text-decoration: none;
+        }
+        .prose-preview-container a:hover {
+          text-decoration: underline !important;
+        }
+
+        /* Images centrées et arrondies */
+        .prose-preview-container img {
+          border-radius: 0.75rem !important;
+          box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1) !important;
+          margin-left: auto !important;
+          margin-right: auto !important;
+          max-width: 100% !important;
+          height: auto !important;
+        }
+      `, { raw: true });
+
+      // 3. TEMPLATE D'APERÇU UTILISANT LA CLASSE 'prose-preview-container'
+      const ProsePreview = createClass({
+        render: function() {
+          const entry = this.props.entry;
+          const title = entry.getIn(['data', 'title']) || '';
+          const body = this.props.widgetFor('body');
+
+          return h('div', { className: 'p-6 max-w-4xl mx-auto bg-white' },
+            title && h('h1', { className: 'text-3xl font-extrabold text-slate-900 mb-6 border-b-2 border-red-700 pb-2' }, title),
+            h('div', { className: 'prose prose-slate max-w-none prose-preview-container' }, body)
+          );
+        }
+      });
+
+      // Appliquer l'aperçu aux collections
+      CMS.registerPreviewTemplate('sorties', ProsePreview);
+      CMS.registerPreviewTemplate('fiches', ProsePreview);
+      CMS.registerPreviewTemplate('pages', ProsePreview);
+
 </script>
   </body>
 </html>

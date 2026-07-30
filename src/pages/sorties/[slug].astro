@@ -16,17 +16,43 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+// 1. Récupération du slug/identifiant de la sortie
+const entrySlug = entry.id;
+
+// 2. Construction de l'URL vers l'interface d'édition Decap CMS
+const decapEditUrltmp = `/admin/index.html#/collections/sorties/entries/${entrySlug}` 
+let decapEditUrl='';
+if (decapEditUrltmp.endsWith('.mdx') ){
+  decapEditUrl = decapEditUrltmp.slice(0, -4); // Supprimer l'extension .mdx pour les fichiers MDX
+} else if (decapEditUrltmp.endsWith('.md') ){
+  decapEditUrl = decapEditUrltmp.slice(0, -3);
+}else{
+  decapEditUrl = decapEditUrltmp;
+}
+
 
 const { title, status, dateFormatted, location, organizers, image, pdfProgram, description } = entry.data;
 ---
 
 <BaseLayout title={title} description={description}>
   <!-- Bouton Retour -->
-  <div class="mb-6">
-    <a href="/sorties" class="inline-flex items-center text-sm font-semibold text-slate-600 hover:text-red-700 transition-colors">
-      ← Retour au calendrier des sorties
-    </a>
-  </div>
+<div class="w-full flex items-center justify-between gap-4 mb-6">
+  <!-- Alignement à gauche -->
+  <a href="/sorties" class="inline-flex items-center text-sm font-semibold text-slate-600 hover:text-red-700 transition-colors">
+    ← Retour au calendrier des sorties
+  </a>
+
+  <!-- Alignement poussé tout à droite (ml-auto) -->
+  <a 
+    href={decapEditUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline-flex items-center gap-1.5 bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors shadow-sm ml-auto"
+    title="Modifier ce contenu dans Decap CMS"
+  >
+    ✏️ Modifier
+  </a>
+</div>
 
   <article class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
     <!-- Image de couverture -->
