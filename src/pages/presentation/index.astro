@@ -10,9 +10,16 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
   <!-- Hero Banner Présentation -->
   <div class="relative bg-slate-900 text-white p-8 md:p-12 rounded-xl mb-10 overflow-hidden shadow-lg">
     <div class="relative z-10 max-w-3xl">
-      <span class="inline-block bg-red-700 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider mb-3">
-        Association loi 1901 — Depuis 1987
-      </span>
+      <!-- Badge avec mention des 40 ans -->
+      <div class="flex flex-wrap gap-2 mb-3">
+        <span class="inline-block bg-red-700 text-white text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+          Association loi 1901 — Depuis 1987
+        </span>
+        <span class="inline-block bg-amber-500/90 text-slate-950 text-xs font-extrabold px-3 py-1 rounded-full uppercase tracking-wider">
+          🎂 Le club va avoir 40 ans en 2027 !
+        </span>
+      </div>
+
       <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-4">
         Le Club Autostar
       </h1>
@@ -41,10 +48,10 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             Le but initial était d'offrir aux propriétaires d'un véhicule de la marque un espace d'échange où confronter leurs expériences et former un véritable club d'amis.
           </p>
           <p>
-            Depuis plus de 35 ans, le club regroupe plusieurs centaines d'équipages répartis dans toute la France. Être Autostariste, c'est bénéficier d'un réseau dynamique d'entraide et participer à des rassemblements chaleureux tout au long de l'année.
+            Fort de cette belle longévité, <strong>le Club Autostar va fêter ses 40 ans en 2027 !</strong> Depuis près de quatre décennies, il regroupe plusieurs centaines d'équipages répartis dans toute la France. Être Autostariste, c'est bénéficier d'un réseau dynamique d'entraide et participer à des rassemblements chaleureux tout au long de l'année.
           </p>
           <div class="bg-slate-50 border-l-4 border-red-700 p-4 rounded-r-lg my-4 text-sm font-medium text-slate-800">
-            🎁 <strong>Offre Nouveaux Propriétaires :</strong> En cadeau de bienvenue, pour le 1er achat d'un camping-car AUTOSTAR neuf de la collection, l'adhésion au club est offerte la première année !
+            🎁 <strong>Offre aux Propriétaires d’un CC AUTOSTAR, neuf ou d’occasion :</strong> En cadeau de bienvenue, la 1ère inscription au club AUTOSTAR est offerte !
           </div>
         </div>
       </section>
@@ -99,7 +106,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           Le Club Autostar est administré par des bénévoles élus en Assemblée Générale et assisté de délégués régionaux.
         </p>
 
-        <!-- Cartes des membres du bureau (à personnaliser si besoin) -->
+        <!-- Cartes des membres du bureau -->
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
           <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
             <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
@@ -160,15 +167,57 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- Bloc Affiliation FFACCC -->
       <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
         <div class="flex items-center gap-3 mb-3">
-          <span class="text-3xl">🇫🇷</span>
+          <img 
+            src="/ffaacc.webp" 
+            alt="Logo FFACCC" 
+            class="h-8 w-auto rounded object-contain bg-white p-0.5 border border-slate-100 shadow-sm"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';"
+          />
+          <span class="text-3xl hidden">🇫🇷</span>
           <div>
             <h4 class="font-bold text-slate-900 text-sm">Club Affilié FFACCC</h4>
             <p class="text-xs text-slate-500">Fédération Française des Associations et Clubs de Camping-Cars</p>
           </div>
         </div>
+
         <p class="text-xs text-slate-600 mb-4 leading-relaxed">
-          En adhérant au Club Autostar, vous bénéficiez également des services et avantages accordés par la FFACCC (carte de membre, assurances, revues spécialisées).
+          En adhérant au Club Autostar, vous bénéficiez également des services et avantages accordés par la FFACCC (carte de membre, assurances, revues spécialisées, possibilité de participer à leurs sorties).
         </p>
+
+        <!-- Coordonnées et contacts FFACCC -->
+        <div class="pt-3 mb-4 border-t border-slate-100 text-xs text-slate-600 space-y-2">
+          <div class="font-semibold text-slate-800 text-[11px] uppercase tracking-wider">Contact FFACCC</div>
+          
+          <!-- Téléphone -->
+          <div class="flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            <a href="tel:+33800800158" class="hover:text-red-700 transition-colors">
+              +33 800 80 01 58
+            </a>
+          </div>
+
+          <!-- Email -->
+          <div class="flex items-center gap-2">
+            <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            <a href="mailto:contact@ffaccc.info" class="hover:text-red-700 transition-colors">
+              contact@ffaccc.info
+            </a>
+          </div>
+
+          <!-- Référence Site -->
+          <div class="flex items-center gap-2 text-slate-500">
+            <svg class="w-3.5 h-3.5 text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+            </svg>
+            <span>Site : <strong class="font-medium text-slate-700">uccf-ffaccc</strong></span>
+          </div>
+        </div>
+
+        <!-- Lien vers le site -->
         <a 
           href="https://www.ffaccc.info" 
           target="_blank" 
@@ -185,7 +234,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         <p class="text-slate-600"><strong>Club Autostar</strong></p>
         <p class="text-slate-600">ZI du Launay, 22800 Saint-Brandan</p>
         <p class="text-slate-600">📞 Téléphone : 02 96 79 60 35</p>
-        <p class="text-slate-600">✉️ Email : autostar.club@wanadoo.fr</p>
+        <p class="text-slate-600">✉️ Email : autostar.club@orange.fr</p>
       </div>
 
     </div>
