@@ -1,0 +1,117 @@
+{
+  "title": "Organigramme Autostar Club 2026",
+  "members": [
+    {
+      "name": "Giovanni Puglisi",
+      "role": "Président",
+      "region": "",
+      "phone": "02.96.79.60.35",
+      "email": "autostar.club@orange.fr",
+      "photo": "/uploads/organigramme/giovanni-puglisi.jpg"
+    },
+    {
+      "name": "Christian Dorlodot des Essarts",
+      "role": "Vice-Président",
+      "region": "Délégué région Nord Pas-de-Calais",
+      "phone": "06.87.08.46.22",
+      "email": "ch.dorlodot@gmail.com",
+      "photo": "/uploads/organigramme/christian-dorlodot.jpg"
+    },
+    {
+      "name": "Patrick Le Provost",
+      "role": "Trésorier",
+      "region": "",
+      "phone": "06.08.78.32.12",
+      "email": "le-provost.patrick@wanadoo.fr",
+      "photo": "/uploads/organigramme/patrick-le-provost.jpg"
+    },
+    {
+      "name": "François Jégat",
+      "role": "Secrétaire",
+      "region": "",
+      "phone": "06.71.61.70.10",
+      "email": "francois.jegat@orange.fr",
+      "photo": "/uploads/organigramme/francois-jegat.jpg"
+    },
+    {
+      "name": "Marcel Guédet",
+      "role": "Secrétaire adjoint",
+      "region": "Délégué de région Grand Est",
+      "phone": "06.21.96.13.66",
+      "email": "marcel.guedet@laposte.net",
+      "photo": "/uploads/organigramme/marcel-guedet.jpg"
+    },
+    {
+      "name": "Marie-Christine Sonnette",
+      "role": "Resp. du site internet",
+      "region": "",
+      "phone": "06.07.42.11.25",
+      "email": "Marc.jolly10@wanadoo.fr",
+      "photo": "/uploads/organigramme/marie-christine-sonnette.jpg"
+    },
+    {
+      "name": "Catherine Flament",
+      "role": "Vérificateur des comptes",
+      "region": "",
+      "phone": "06.01.71.78.69",
+      "email": "flamentcat@wanadoo.fr",
+      "photo": "/uploads/organigramme/catherine-flament.jpg"
+    },
+    {
+      "name": "Monique Desannaux",
+      "role": "Vérificateur des comptes",
+      "region": "",
+      "phone": "06.59.09.99.39",
+      "email": "daniel-desannaux@bbox.fr",
+      "photo": "/uploads/organigramme/monique-desannaux.jpg"
+    },
+    {
+      "name": "Michèle Hoizey",
+      "role": "Déléguée région Ile de France Est",
+      "region": "",
+      "phone": "06.25.07.17.35 / 06.22.72.24.96",
+      "email": "mc@hoizey.com",
+      "photo": "/uploads/organigramme/michele-hoizey.jpg"
+    },
+    {
+      "name": "Marie-Thérèse & René Allanic",
+      "role": "Délégués région Bretagne",
+      "region": "",
+      "phone": "06.07.70.53.91",
+      "email": "rene.allanic@sfr.fr",
+      "photo": "/uploads/organigramme/marie-therese-rene-allanic.jpg"
+    },
+    {
+      "name": "Monique et Daniel Desannaux",
+      "role": "Délégués région Normandie Sud",
+      "region": "Ouest et Paris",
+      "phone": "06.59.09.99.39 / 06.95.19.03.77",
+      "email": "daniel-desannaux@bbox.fr",
+      "photo": "/uploads/organigramme/monique-daniel-desannaux.jpg"
+    },
+    {
+      "name": "Paul Castryck",
+      "role": "Délégué région Picardie",
+      "region": "Champagne - Ardennes",
+      "phone": "06.85.72.59.66",
+      "email": "paul.castryck@wanadoo.fr",
+      "photo": "/uploads/organigramme/paul-castryck.jpg"
+    },
+    {
+      "name": "Ginette Clerget",
+      "role": "Déléguée région PACA",
+      "region": "",
+      "phone": "06.70.14.89.55",
+      "email": "gclerget2@orange.fr",
+      "photo": "/uploads/organigramme/ginette-clerget.jpg"
+    },
+    {
+      "name": "Pierre Gourceaud",
+      "role": "Délégué région Ile de France",
+      "region": "Ouest et Paris",
+      "phone": "07.50.07.63.65",
+      "email": "",
+      "photo": "/uploads/organigramme/pierre-gourceaud.jpg"
+    }
+  ]
+}

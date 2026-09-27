@@ -130,3 +130,24 @@ collections:
       - { label: "Résumé de l'astuce", name: "description", widget: "text" }
       - { label: "Explications détaillées", name: "body", widget: "richtext" }
 
+
+# Dans public/admin/config.yml, sous collections -> pages -> files
+  - name: "pages"
+    label: "Gestion des pages du site"
+    files: 
+      - file: "src/data/organigramme.json"
+        label: "Organigramme du Club"
+        name: "organigramme"
+        fields:
+          - { label: "Titre", name: "title", widget: "string" }
+          - label: "Membres du bureau et délégués"
+            name: "members"
+            widget: "list"
+            summary: "{{fields.name}} — {{fields.role}}"
+            fields:
+              - { label: "Nom & Prénom", name: "name", widget: "string" }
+              - { label: "Rôle / Fonction", name: "role", widget: "string" }
+              - { label: "Région / Délégation (facultatif)", name: "region", widget: "string", required: false }
+              - { label: "Téléphone", name: "phone", widget: "string", required: false }
+              - { label: "Adresse Email", name: "email", widget: "string", required: false }
+              - { label: "Photo du membre", name: "photo", widget: "image", required: false }

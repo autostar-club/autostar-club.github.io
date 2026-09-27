@@ -1,0 +1,109 @@
+---
+// src/components/presentation/Organigramme.astro
+import organigrammeData from '../../data/organigramme.json';
+
+interface Member {
+  name: string;
+  role: string;
+  region?: string;
+  phone?: string;
+  email?: string;
+  photo?: string;
+}
+
+const members: Member[] = organigrammeData.members || [];
+const president = members.find((m) => m.role.toLowerCase().includes('président') && !m.role.toLowerCase().includes('vice'));
+const otherMembers = members.filter((m) => m !== president);
+---
+
+<div class="my-6">
+  <!-- Carte du Président (En tête, centrée) -->
+  {president && (
+    <div class="max-w-xs mx-auto mb-10">
+      <div class="bg-gradient-to-b from-red-50 to-white border-2 border-red-700/30 rounded-xl p-5 text-center shadow-md hover:shadow-lg transition-shadow">
+        <div class="w-24 h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-red-700 bg-slate-100 shadow-sm flex items-center justify-center">
+          {president.photo ? (
+            <img 
+              src={president.photo} 
+              alt={president.name} 
+              class="w-full h-full object-cover"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+            />
+          ) : null}
+          <span class="text-2xl font-bold text-red-700 hidden">GP</span>
+        </div>
+
+        <span class="inline-block bg-red-700 text-white text-[11px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider mb-1">
+          {president.role}
+        </span>
+        <h3 class="font-extrabold text-slate-900 text-base mb-2">{president.name}</h3>
+
+        <div class="space-y-1 text-xs text-slate-600">
+          {president.phone && (
+            <div>
+              📞 <a href={`tel:${president.phone.replace(/[^0-9+]/g, '')}`} class="hover:text-red-700 font-medium">
+                {president.phone}
+              </a>
+            </div>
+          )}
+          {president.email && (
+            <div>
+              ✉️ <a href={`mailto:${president.email}`} class="hover:text-red-700 truncate block max-w-full font-medium">
+                {president.email}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  )}
+
+  <!-- Grille de l'ensemble du Bureau et Délégués Régionaux -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-5">
+    {otherMembers.map((member) => (
+      <div class="bg-slate-50 hover:bg-white border border-slate-200 rounded-xl p-4 text-center shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+        <div>
+          <!-- Photo ou Avatar -->
+          <div class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden border border-slate-300 bg-white shadow-inner flex items-center justify-center">
+            {member.photo ? (
+              <img 
+                src={member.photo} 
+                alt={member.name} 
+                class="w-full h-full object-cover"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+              />
+            ) : null}
+            <span class="text-xl font-bold text-slate-400 hidden">
+              {member.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
+            </span>
+          </div>
+
+          <!-- Nom et Rôle -->
+          <h4 class="font-bold text-slate-900 text-sm leading-snug">{member.name}</h4>
+          <p class="text-xs font-semibold text-red-700 mt-0.5">{member.role}</p>
+          {member.region && (
+            <p class="text-[11px] text-slate-500 italic mt-0.5">{member.region}</p>
+          )}
+        </div>
+
+        <!-- Coordonnées cliquables -->
+        <div class="pt-3 mt-3 border-t border-slate-200/80 space-y-1 text-xs text-slate-600">
+          {member.phone && (
+            <div class="truncate">
+              📞 <a href={`tel:${member.phone.split('/')[0].replace(/[^0-9+]/g, '')}`} class="hover:text-red-700 font-medium">
+                {member.phone}
+              </a>
+            </div>
+          )}
+          {member.email && (
+            <div class="truncate">
+              ✉️ <a href={`mailto:${member.email}`} class="hover:text-red-700 font-medium" title={member.email}>
+                {member.email}
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

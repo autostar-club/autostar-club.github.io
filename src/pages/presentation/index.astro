@@ -1,6 +1,8 @@
 ---
 // src/pages/presentation.astro
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Organigramme from './Organigramme.astro';
+
 ---
 
 <BaseLayout 
@@ -97,51 +99,59 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
       </section>
 
-      <!-- Section Bureau & Organigramme -->
+
+
+<!-- Section Bureau & Organigramme -->
       <section class="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="text-2xl font-bold text-slate-900 mb-4 pb-2 border-b-2 border-red-700 flex items-center gap-2">
-          <span>👥</span> Le Bureau et le Conseil d'Administration
+        <h2 class="text-2xl font-bold text-slate-900 mb-2 pb-2 border-b-2 border-red-700 flex items-center gap-2">
+          <span>👥</span> Le Bureau et le Conseil d'Administration (2026)
         </h2>
         <p class="text-sm text-slate-600 mb-6">
           Le Club Autostar est administré par des bénévoles élus en Assemblée Générale et assisté de délégués régionaux.
         </p>
 
-        <!-- Cartes des membres du bureau -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-          <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
-            <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
-              P
+        <!-- Composant des cartes individuelles modifiables via Decap CMS -->
+        <Organigramme />
+
+        <!-- 🖼️ Bloc Organigramme Complet (Affiche Officielle) -->
+        <div class="mt-10 pt-6 border-t border-slate-200">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Affiche officielle de l'organigramme 2026</h3>
+              <p class="text-xs text-slate-500">Document officiel au format portrait</p>
             </div>
-            <h4 class="font-bold text-slate-900 text-sm">Président</h4>
-            <p class="text-xs text-slate-500">Bureau National</p>
+            <a 
+              href="/uploads/ORGANIGRAMME-2026-PORTRAIT_0.jpg" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-1.5 text-xs font-semibold bg-red-700 hover:bg-red-800 text-white px-3.5 py-2 rounded-lg transition-colors shadow-sm self-start sm:self-auto"
+            >
+              🔍 Ouvrir en haute résolution
+            </a>
           </div>
 
-          <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
-            <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
-              VP
-            </div>
-            <h4 class="font-bold text-slate-900 text-sm">Vice-Président</h4>
-            <p class="text-xs text-slate-500">Coordination des sorties</p>
+          <!-- Cadre de prévisualisation cliquable -->
+          <div class="bg-slate-50 border border-slate-200 rounded-xl p-3 text-center overflow-hidden group">
+            <a 
+              href="/uploads/ORGANIGRAMME-2026-PORTRAIT_0.jpg" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="block relative overflow-hidden rounded-lg cursor-zoom-in"
+              title="Cliquez pour agrandir l'organigramme"
+            >
+              <img 
+                src="/uploads/ORGANIGRAMME-2026-PORTRAIT_0.jpg" 
+                alt="Organigramme officiel Autostar Club 2026" 
+                class="max-h-[520px] w-auto mx-auto object-contain rounded-lg shadow-sm group-hover:scale-[1.01] transition-transform duration-300"
+              />
+              <!-- Effet de survol -->
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 bg-slate-900/80 text-white text-xs font-semibold px-4 py-2 rounded-full transition-opacity shadow-lg">
+                  🔍 Cliquez pour agrandir en plein écran
+                </span>
+              </div>
+            </a>
           </div>
-
-          <div class="p-4 border border-slate-200 rounded-lg text-center bg-slate-50">
-            <div class="w-16 h-16 bg-red-100 text-red-700 font-bold rounded-full flex items-center justify-center mx-auto mb-2 text-xl">
-              T
-            </div>
-            <h4 class="font-bold text-slate-900 text-sm">Trésorier</h4>
-            <p class="text-xs text-slate-500">Gestion des adhésions</p>
-          </div>
-        </div>
-
-        <div class="text-center">
-          <a 
-            href="/fiches-pratiques/node-node-465.mdx" 
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-xs font-semibold bg-slate-100 hover:bg-slate-200 text-slate-800 px-4 py-2.5 rounded-lg transition-colors border border-slate-300"
-          >
-            📥 Télécharger l'organigramme complet du club (PDF)
-          </a>
         </div>
       </section>
 
