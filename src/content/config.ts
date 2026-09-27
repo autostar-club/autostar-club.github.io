@@ -33,7 +33,7 @@ const fichesCollection = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    category: z.enum(['Électricité', 'Plomberie', 'Entretien', 'Accessoires', 'Sécurité', 'Mécanique']),
+    category: z.enum(['OrganisationDuVéhicule','Électricité', 'Plomberie', 'Entretien', 'Accessoires', 'Sécurité', 'Mécanique']),
     date: dateStringSchema,
     author: z.string().optional(),
     pdfFile: z.string().optional(),
